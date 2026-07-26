@@ -12,9 +12,15 @@
     box-sizing:border-box;
     font-family:Arial, sans-serif;
 }
-
 body{
-    background:#f5f5f5;
+    background-image: url("background.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+body{
+    
 }
 
 header{
@@ -93,27 +99,7 @@ button{
 <body>
     <div id="welcome">
     <img src="logo.jpeg" alt="Royal Events">
-</div>
-
-<style>
-#welcome{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100vh;
-    background:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-}
-
-#welcome img{
-    width:350px;
-    max-width:90%;
-}
-</style>
+    </div>
 
 <script>
 setTimeout(function(){
