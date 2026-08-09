@@ -123,6 +123,47 @@ resize:none;
 width:100%;
 background:#6b3e26;
 }
+    .ai-suggestion{
+background:white;
+max-width:600px;
+margin:30px auto;
+padding:30px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+.ai-suggestion h2{
+color:#6b3e26;
+margin-bottom:10px;
+}
+
+.ai-suggestion p{
+margin-bottom:20px;
+}
+
+.ai-suggestion select,
+.ai-suggestion input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.ai-suggestion button{
+width:100%;
+background:#6b3e26;
+}
+
+#aiResult{
+margin-top:20px;
+padding:20px;
+background:#f8f8f8;
+border-radius:8px;
+text-align:left;
+line-height:1.8;
+}
 </style>
 </head>
 
@@ -211,6 +252,46 @@ text-align:center;">
     </a>
 </div>
     
+</section>
+    <section class="ai-suggestion" id="ai-suggestion">
+
+    <h2>🤖 AI Decoration Suggestion</h2>
+
+    <p>
+        Tell us about your event and get a decoration suggestion!
+    </p>
+
+    <select id="aiEvent">
+        <option value="">Select Event</option>
+        <option value="wedding">Wedding</option>
+        <option value="engagement">Engagement</option>
+        <option value="haldi">Haldi</option>
+        <option value="birthday">Birthday</option>
+        <option value="babyshower">Baby Shower</option>
+        <option value="mehandi">Mehandi</option>
+        <option value="naming">Naming Ceremony</option>
+    </select>
+
+    <select id="aiTheme">
+        <option value="">Select Theme</option>
+        <option value="royal">Royal</option>
+        <option value="floral">Floral</option>
+        <option value="modern">Modern</option>
+        <option value="traditional">Traditional</option>
+    </select>
+
+    <input
+        type="number"
+        id="aiBudget"
+        placeholder="Your Budget ₹"
+    >
+
+    <button onclick="getSuggestion()">
+        ✨ Get Decoration Suggestion
+    </button>
+
+    <div id="aiResult"></div>
+
 </section>
 
 
@@ -356,6 +437,86 @@ window.sendBooking = async function(){
         );
 
     }
+
+};
+        window.getSuggestion = function(){
+
+    let event = document.getElementById("aiEvent").value;
+    let theme = document.getElementById("aiTheme").value;
+    let budget = Number(document.getElementById("aiBudget").value);
+
+    let result = document.getElementById("aiResult");
+
+    if(!event || !theme || !budget){
+        result.innerHTML =
+        "⚠️ Please select event, theme and budget.";
+        return;
+    }
+
+    let decoration = "";
+    let ideas = "";
+
+    if(event === "wedding"){
+        decoration = "Grand Wedding Decoration";
+        ideas = "🌸 Floral stage decoration<br>💡 Warm fairy lights<br>🌿 Fresh flower entrance";
+    }
+
+    else if(event === "engagement"){
+        decoration = "Elegant Engagement Setup";
+        ideas = "💖 Ring ceremony stage<br>🌸 Flower backdrop<br>✨ LED lights";
+    }
+
+    else if(event === "haldi"){
+        decoration = "Beautiful Haldi Theme";
+        ideas = "🌼 Yellow floral backdrop<br>💛 Marigold decorations<br>📸 Haldi photo booth";
+    }
+
+    else if(event === "birthday"){
+        decoration = "Fun Birthday Decoration";
+        ideas = "🎈 Balloon decoration<br>🎂 Birthday backdrop<br>✨ LED lights";
+    }
+
+    else if(event === "babyshower"){
+        decoration = "Cute Baby Shower Setup";
+        ideas = "👶 Baby-themed backdrop<br>🎈 Pastel balloons<br>🌸 Floral decoration";
+    }
+
+    else if(event === "mehandi"){
+        decoration = "Traditional Mehandi Decoration";
+        ideas = "💚 Colorful backdrop<br>🌸 Floral decoration<br>🪔 Traditional props";
+    }
+
+    else if(event === "naming"){
+        decoration = "Beautiful Naming Ceremony";
+        ideas = "👶 Baby welcome backdrop<br>🌸 Floral decoration<br>🎈 Balloon setup";
+    }
+
+    let themeText = "";
+
+    if(theme === "royal"){
+        themeText = "Royal & luxurious";
+    }
+    else if(theme === "floral"){
+        themeText = "Fresh floral";
+    }
+    else if(theme === "modern"){
+        themeText = "Modern & stylish";
+    }
+    else{
+        themeText = "Traditional & elegant";
+    }
+
+    result.innerHTML =
+    "<h3>✨ Your Decoration Suggestion</h3>" +
+    "<b>Event:</b> " + decoration + "<br>" +
+    "<b>Theme:</b> " + themeText + "<br>" +
+    "<b>Budget:</b> ₹" + budget.toLocaleString("en-IN") +
+    "<hr>" +
+    "<b>Recommended Ideas:</b><br>" +
+    ideas +
+    "<br><br>" +
+    "💡 <b>Royal Events Recommendation:</b><br>" +
+    "Contact Royal Events for a customized decoration package.";
 
 };
 
