@@ -287,10 +287,8 @@ function sendBooking(){
 
     let whatsappNumber = "917796774023";
 
-    window.open(
-        "https://wa.me/" + whatsappNumber + "?text=" + text,
-        "_blank"
-    );
+    window.location.href =
+    "https://wa.me/" + whatsappNumber + "?text=" + text;
 }
 
 </body>
