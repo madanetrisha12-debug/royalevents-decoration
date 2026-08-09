@@ -265,7 +265,7 @@ text-align:center;">
 </section>
 <script>
 function sendBooking(){
-
+alert("Booking button working!");
     let name = document.getElementById("name").value;
     let mobile = document.getElementById("mobile").value;
     let service = document.getElementById("service").value;
@@ -287,8 +287,7 @@ function sendBooking(){
 
     let whatsappNumber = "917796774023";
 
-    window.location.href =
-    "https://wa.me/" + whatsappNumber + "?text=" + text;
+    window.location.href ="https://wa.me/" + whatsappNumber + "?text=" + text;
 }
 
 </body>
