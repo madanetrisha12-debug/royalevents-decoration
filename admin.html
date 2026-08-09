@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Royal Events - Admin Panel</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+/* Header */
+
+header{
+    background:#6b3e26;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+header h1{
+    margin-bottom:5px;
+}
+
+/* Dashboard */
+
+.dashboard{
+    padding:25px;
+}
+
+.dashboard h2{
+    margin-bottom:20px;
+}
+
+/* Cards */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+
+.card h3{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.card p{
+    font-size:30px;
+    font-weight:bold;
+}
+
+/* Bookings */
+
+.bookings{
+    background:white;
+    margin-top:30px;
+    padding:20px;
+    border-radius:10px;
+    overflow-x:auto;
+}
+
+.bookings h2{
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+th{
+    background:#6b3e26;
+    color:white;
+}
+
+/* Status */
+
+.status{
+    padding:6px 10px;
+    border-radius:5px;
+    font-size:14px;
+}
+
+.pending{
+    background:#fff3cd;
+}
+
+.confirmed{
+    background:#d4edda;
+}
+
+.cancelled{
+    background:#f8d7da;
+}
+
+/* Mobile */
+
+@media(max-width:800px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:500px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>THE ROYAL EVENTS</h1>
+
+<p>Admin Panel</p>
+
+</header>
+
+
+<section class="dashboard">
+
+<h2>Dashboard</h2>
+
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Bookings</h3>
+<p>0</p>
+</div>
+
+
+<div class="card">
+<h3>Pending</h3>
+<p>0</p>
+</div>
+
+
+<div class="card">
+<h3>Confirmed</h3>
+<p>0</p>
+</div>
+
+
+<div class="card">
+<h3>Cancelled</h3>
+<p>0</p>
+</div>
+
+</div>
+
+
+<div class="bookings">
+
+<h2>Recent Bookings</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Booking ID</th>
+<th>Customer</th>
+<th>Service</th>
+<th>Date</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+<tr>
+
+<td>RE132425</td>
+<td>Trisha</td>
+<td>Balloon Decoration</td>
+<td>20 Aug 2026</td>
+
+<td>
+<span class="status pending">
+Pending
+</span>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+</body>
+</html>
