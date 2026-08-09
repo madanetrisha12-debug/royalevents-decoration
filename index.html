@@ -264,8 +264,8 @@ text-align:center;">
 </a>
 </section>
 <script>
-function sendBooking(){
-alert("Booking button working!");
+    function sendBooking(){
+
     let name = document.getElementById("name").value;
     let mobile = document.getElementById("mobile").value;
     let service = document.getElementById("service").value;
@@ -287,22 +287,11 @@ alert("Booking button working!");
 
     let whatsappNumber = "917796774023";
 
-let whatsappURL =
-    "https://api.whatsapp.com/send?phone=" +
-    whatsappNumber +
-    "&text=" +
-    encodeURIComponent(
-        "NEW BOOKING - THE ROYAL EVENTS\n\n" +
-        "Booking ID: " + bookingID + "\n" +
-        "Name: " + name + "\n" +
-        "Mobile: " + mobile + "\n" +
-        "Service: " + service + "\n" +
-        "Event Date: " + date + "\n" +
-        "Location: " + location + "\n" +
-        "Requirement: " + message
+    window.open(
+        "https://wa.me/" + whatsappNumber + "?text=" + text,
+        "_blank"
     );
-
-window.location.href = whatsappURL;
-    </script>
+}
+</script>
 </body>
 </html>
