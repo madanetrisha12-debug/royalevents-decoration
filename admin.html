@@ -4,230 +4,183 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Royal Events - Admin Panel</title>
+<title>Royal Events Admin Login</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     background:#f4f4f4;
 }
 
-/* Header */
-
-header{
-    background:#6b3e26;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
-
-header h1{
-    margin-bottom:5px;
-}
-
-/* Dashboard */
-
-.dashboard{
-    padding:25px;
-}
-
-.dashboard h2{
-    margin-bottom:20px;
-}
-
-/* Cards */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-}
-
-.card{
+.login-box{
+    width:90%;
+    max-width:400px;
     background:white;
-    padding:25px;
-    border-radius:10px;
-    text-align:center;
-    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
 }
 
-.card h3{
-    font-size:18px;
+h1{
+    text-align:center;
+    color:#6b3e26;
     margin-bottom:10px;
 }
 
-.card p{
-    font-size:30px;
-    font-weight:bold;
+h2{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-/* Bookings */
-
-.bookings{
-    background:white;
-    margin-top:30px;
-    padding:20px;
-    border-radius:10px;
-    overflow-x:auto;
-}
-
-.bookings h2{
-    margin-bottom:20px;
-}
-
-table{
+input{
     width:100%;
-    border-collapse:collapse;
-}
-
-th,td{
     padding:12px;
-    border-bottom:1px solid #ddd;
-    text-align:left;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
 }
 
-th{
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
     background:#6b3e26;
     color:white;
-}
-
-/* Status */
-
-.status{
-    padding:6px 10px;
+    border:none;
     border-radius:5px;
-    font-size:14px;
+    cursor:pointer;
 }
 
-.pending{
-    background:#fff3cd;
+#message{
+    text-align:center;
+    margin-top:15px;
 }
 
-.confirmed{
-    background:#d4edda;
+.dashboard{
+    display:none;
 }
-
-.cancelled{
-    background:#f8d7da;
-}
-
-/* Mobile */
-
-@media(max-width:800px){
-
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-}
-
-@media(max-width:500px){
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<header>
+<div class="login-box" id="loginBox">
 
-<h1>THE ROYAL EVENTS</h1>
+    <h1>THE ROYAL EVENTS</h1>
+    <h2>Admin Login</h2>
 
-<p>Admin Panel</p>
+    <input
+        type="email"
+        id="email"
+        placeholder="Admin Email"
+    >
 
-</header>
+    <input
+        type="password"
+        id="password"
+        placeholder="Password"
+    >
 
+    <button onclick="loginAdmin()">
+        Login
+    </button>
 
-<section class="dashboard">
-
-<h2>Dashboard</h2>
-
-
-<div class="cards">
-
-<div class="card">
-<h3>Total Bookings</h3>
-<p>0</p>
-</div>
-
-
-<div class="card">
-<h3>Pending</h3>
-<p>0</p>
-</div>
-
-
-<div class="card">
-<h3>Confirmed</h3>
-<p>0</p>
-</div>
-
-
-<div class="card">
-<h3>Cancelled</h3>
-<p>0</p>
-</div>
+    <p id="message"></p>
 
 </div>
 
 
-<div class="bookings">
+<div class="dashboard" id="dashboard">
 
-<h2>Recent Bookings</h2>
+    <h1>THE ROYAL EVENTS</h1>
 
-<table>
+    <h2>Admin Dashboard</h2>
 
-<thead>
+    <p>Login Successful!</p>
 
-<tr>
-
-<th>Booking ID</th>
-<th>Customer</th>
-<th>Service</th>
-<th>Date</th>
-<th>Status</th>
-
-</tr>
-
-</thead>
-
-
-<tbody>
-
-<tr>
-
-<td>RE132425</td>
-<td>Trisha</td>
-<td>Balloon Decoration</td>
-<td>20 Aug 2026</td>
-
-<td>
-<span class="status pending">
-Pending
-</span>
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
+    <button onclick="logoutAdmin()">Logout</button>
 
 </div>
 
-</section>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBQ3VaEXDkNC559MqQXTV8D_Ju5UtF_EvQ",
+    authDomain: "the-royal-events-ebc7b.firebaseapp.com",
+    projectId: "the-royal-events-ebc7b",
+    storageBucket: "the-royal-events-ebc7b.firebasestorage.app",
+    messagingSenderId: "495660292303",
+    appId: "1:495660292303:web:b49e633791df627baa3fba",
+    measurementId: "G-CW7EWM5EBH"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+
+window.loginAdmin = function(){
+
+    let email = document.getElementById("email").value;
+
+    let password = document.getElementById("password").value;
+
+    let message = document.getElementById("message");
+
+
+    signInWithEmailAndPassword(auth, email, password)
+
+    .then(() => {
+
+        document.getElementById("loginBox").style.display = "none";
+
+        document.getElementById("dashboard").style.display = "block";
+
+    })
+
+    .catch((error) => {
+
+        message.innerText = "Invalid email or password.";
+
+    });
+
+};
+
+
+window.logoutAdmin = function(){
+
+    signOut(auth).then(() => {
+
+        document.getElementById("dashboard").style.display = "none";
+
+        document.getElementById("loginBox").style.display = "block";
+
+    });
+
+};
+
+</script>
 
 </body>
 </html>
