@@ -90,6 +90,39 @@ button{
     cursor:pointer;
     margin-top:10px;
 }
+    .booking{
+background:white;
+max-width:600px;
+margin:30px auto;
+padding:30px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+.booking h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.booking input,
+.booking select,
+.booking textarea{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.booking textarea{
+height:100px;
+resize:none;
+}
+
+.booking button{
+width:100%;
+background:#6b3e26;
+}
 </style>
 </head>
 
@@ -179,6 +212,47 @@ text-align:center;">
 </div>
     
 </section>
+
+
+<!-- Online Booking -->
+<section class="booking" id="booking">
+    <h2>Online Booking</h2>
+
+    <form onsubmit="sendBooking(); return false;">
+
+        <input type="text" id="name" placeholder="Your Name" required>
+
+        <input type="tel" id="mobile" placeholder="Mobile Number" required>
+
+        <select id="service" required>
+            <option value="">Select Service</option>
+            <option>Balloon Decoration</option>
+            <option>Bride-Groom Entry</option>
+            <option>Haldi Decoration</option>
+            <option>Engagement Decoration</option>
+            <option>Baby Shower Decoration</option>
+            <option>Birthday Party Decoration</option>
+            <option>Wedding Car Decoration</option>
+            <option>Wedding Decoration</option>
+            <option>Mehandi Decoration</option>
+            <option>Baby Welcome Decoration</option>
+            <option>Naming Ceremony Decoration</option>
+        </select>
+
+        <input type="date" id="date" required>
+
+        <input type="text" id="location" placeholder="Event Location" required>
+
+        <textarea id="message" placeholder="Additional Requirements"></textarea>
+
+        <button type="submit">Submit Booking</button>
+
+    </form>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+    <h2>Contact Us</h2>
 <section class="contact" id="contact">
     <h2>Contact Us</h2>
     <p>📞 7796774023</p>
@@ -189,6 +263,34 @@ text-align:center;">
     <button>Book on WhatsApp</button>
 </a>
 </section>
+<script>
 
+function sendBooking(){
+
+    let name = document.getElementById("name").value;
+    let mobile = document.getElementById("mobile").value;
+    let service = document.getElementById("service").value;
+    let date = document.getElementById("date").value;
+    let location = document.getElementById("location").value;
+    let message = document.getElementById("message").value;
+
+    let text =
+        "🌟 NEW BOOKING - THE ROYAL EVENTS 🌟%0A%0A" +
+        "👤 Name: " + name + "%0A" +
+        "📞 Mobile: " + mobile + "%0A" +
+        "🎉 Service: " + service + "%0A" +
+        "📅 Event Date: " + date + "%0A" +
+        "📍 Location: " + location + "%0A" +
+        "📝 Requirement: " + message;
+
+    let whatsappNumber = "917796774023";
+
+    window.open(
+        "https://wa.me/" + whatsappNumber + "?text=" + text,
+        "_blank"
+    );
+}
+
+</script>
 </body>
 </html>
