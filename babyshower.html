@@ -71,7 +71,7 @@
 <br><br>
 
 <a href="index.html">⬅ Back</a>
-<script>
+    <script>
 
 document.querySelectorAll("img").forEach(function(img){
 
@@ -79,24 +79,19 @@ document.querySelectorAll("img").forEach(function(img){
 
     img.onclick = function(){
 
-        localStorage.setItem(
-            "selectedDecoration",
-            img.src
-        );
+        localStorage.setItem("selectedDecoration", img.src);
+        localStorage.removeItem("selectedVideo");
 
         localStorage.setItem(
             "selectedService",
             "Baby Shower Decoration"
         );
 
-        window.location.href =
-            "index.html#booking";
-
+        window.location.href = "index.html#booking";
     };
 
 });
-</script>
-<script>
+
 
 document.querySelectorAll("video").forEach(function(video){
 
@@ -106,23 +101,18 @@ document.querySelectorAll("video").forEach(function(video){
 
         let source = video.querySelector("source");
 
-        localStorage.setItem(
-            "selectedVideo",
-            source.src
-        );
+        localStorage.setItem("selectedVideo", source.src);
+        localStorage.removeItem("selectedDecoration");
 
         localStorage.setItem(
             "selectedService",
             "Baby Shower Decoration"
         );
 
-        window.location.href =
-            "index.html#booking";
-
+        window.location.href = "index.html#booking";
     };
 
 });
-
 </script>
 </body>
 </html>
