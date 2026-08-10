@@ -30,6 +30,31 @@
 
 <a href="index.html" class="back">⬅ Back to Home</a>
 
+<script>
 
+document.querySelectorAll("img").forEach(function(img){
+
+    img.style.cursor = "pointer";
+
+    img.onclick = function(){
+
+        localStorage.setItem(
+            "selectedDecoration",
+            img.src
+        );
+
+        localStorage.setItem(
+            "selectedService",
+            "Haldi Decoration"
+        );
+
+        window.location.href =
+            "index.html#booking";
+
+    };
+
+});
+
+</script>
 </body>
 </html>
