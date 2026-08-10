@@ -360,8 +360,16 @@ function sendBooking(){
     let selectedVideo =
         localStorage.getItem("selectedVideo");
 
-    let bookingID =
-        "RE" + Math.floor(100000 + Math.random() * 900000);
+    let bookingNumber =
+    parseInt(localStorage.getItem("bookingNumber") || "0") + 1;
+
+localStorage.setItem(
+    "bookingNumber",
+    bookingNumber
+);
+
+let bookingID =
+    "RE-" + String(bookingNumber).padStart(2, "0");
 
     let text =
         "NEW BOOKING - THE ROYAL EVENTS\n\n" +
