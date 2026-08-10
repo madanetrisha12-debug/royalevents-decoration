@@ -265,33 +265,8 @@ text-align:center;">
     <button>Book on WhatsApp</button>
 </a>
 </section>
-    <script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
-import {
-    getFirestore,
-    collection,
-    addDoc
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyBQ3VaEXDkNC559MqQXTV8D_Ju5UtF_EqV",
-    authDomain: "the-royal-events-ebc7b.firebaseapp.com",
-    projectId: "the-royal-events-ebc7b",
-    storageBucket: "the-royal-events-ebc7b.firebasestorage.app",
-    messagingSenderId: "495660292303",
-    appId: "1:495660292303:web:b49e633791df627baa3fba"
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-
-window.sendBooking = async function(){
+    <script>
+function sendBooking(){
 
     let name = document.getElementById("name").value;
     let mobile = document.getElementById("mobile").value;
@@ -303,64 +278,28 @@ window.sendBooking = async function(){
     let bookingID =
         "RE" + Math.floor(100000 + Math.random() * 900000);
 
+    let text =
+        "NEW BOOKING - THE ROYAL EVENTS\n\n" +
+        "Booking ID: " + bookingID + "\n" +
+        "Name: " + name + "\n" +
+        "Mobile: " + mobile + "\n" +
+        "Service: " + service + "\n" +
+        "Event Date: " + date + "\n" +
+        "Location: " + location + "\n" +
+        "Requirement: " + message;
 
-    try {
+    let whatsappNumber = "917796774023";
 
-        // Save booking in Firebase
+    alert("✅ Booking details तयार आहेत. WhatsApp उघडत आहे.");
 
-        await addDoc(collection(db, "bookings"), {
-
-            bookingID: bookingID,
-            name: name,
-            mobile: mobile,
-            service: service,
-            date: date,
-            location: location,
-            message: message,
-            status: "Pending",
-            createdAt: new Date().toISOString()
-
-        });
-
-
-        // WhatsApp message
-
-        let text =
-            "NEW BOOKING - THE ROYAL EVENTS%0A%0A" +
-            "Booking ID: " + bookingID + "%0A" +
-            "Name: " + name + "%0A" +
-            "Mobile: " + mobile + "%0A" +
-            "Service: " + service + "%0A" +
-            "Event Date: " + date + "%0A" +
-            "Location: " + location + "%0A" +
-            "Requirement: " + message;
-
-
-        let whatsappNumber = "917796774023";
-
-
-        window.open(
-            "https://wa.me/" +
-            whatsappNumber +
-            "?text=" +
-            text,
-            "_blank"
-        );
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "Booking save झाली नाही. कृपया पुन्हा try करा."
-        );
-
-    }
-
-};
-
+    window.open(
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(text),
+        "_blank"
+    );
+}
 </script>
 
 </body>
