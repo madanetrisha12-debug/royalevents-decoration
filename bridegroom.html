@@ -62,7 +62,32 @@ img{
 
 <br><br>
 <a href="index.html" class="back">⬅ Back to Home</a>
+<script>
 
+document.querySelectorAll("video").forEach(function(video){
+
+    video.style.cursor = "pointer";
+
+    video.onclick = function(){
+
+        localStorage.setItem(
+            "selectedDecoration",
+            video.querySelector("source").src
+        );
+
+        localStorage.setItem(
+            "selectedService",
+            "Bride-Groom Entry"
+        );
+
+        window.location.href =
+            "index.html#booking";
+
+    };
+
+});
+
+</script>
 
 </body>
 </html>
