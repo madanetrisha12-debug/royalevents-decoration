@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
+
 <title>Bride Groom Entry</title>
-    <style>
+
+<style>
+
 body{
     margin:0;
     padding:20px;
@@ -19,13 +23,26 @@ h1{
     border-radius:10px;
 }
 
-img{
+video{
     width:300px;
-    height:220px;
-    object-fit:cover;
+    max-width:90%;
     margin:10px;
     border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,0.3);
+}
+
+.book-btn{
+    display:block;
+    width:300px;
+    max-width:90%;
+    margin:5px auto 20px;
+    padding:12px;
+    background:#6b3e26;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
 }
 
 .back-btn{
@@ -37,57 +54,92 @@ img{
     text-decoration:none;
     border-radius:5px;
 }
+
 </style>
+
 </head>
 
 <body>
 
 <h1>💍 Bride Groom Entry</h1>
 
-<video width="300" controls>
+
+<!-- VIDEO 1 -->
+
+<video controls>
     <source src="bridegroom1.mp4.mp4" type="video/mp4">
 </video>
 
-<video width="300" controls>
+<button class="book-btn"
+onclick="selectVideo('bridegroom1.mp4.mp4')">
+    Book This Entry
+</button>
+
+
+<!-- VIDEO 2 -->
+
+<video controls>
     <source src="bridegroom2.mp4.mp4" type="video/mp4">
 </video>
 
-<video width="300" controls>
+<button class="book-btn"
+onclick="selectVideo('bridegroom2.mp4.mp4')">
+    Book This Entry
+</button>
+
+
+<!-- VIDEO 3 -->
+
+<video controls>
     <source src="bridegroom3.mp4.mp4" type="video/mp4">
 </video>
 
-<video width="300" controls>
+<button class="book-btn"
+onclick="selectVideo('bridegroom3.mp4.mp4')">
+    Book This Entry
+</button>
+
+
+<!-- VIDEO 4 -->
+
+<video controls>
     <source src="bridegroom4.mp4.mp4" type="video/mp4">
 </video>
 
-<br><br>
-<a href="index.html" class="back">⬅ Back to Home</a>
+<button class="book-btn"
+onclick="selectVideo('bridegroom4.mp4.mp4')">
+    Book This Entry
+</button>
+
+
+<br>
+
+<a href="index.html" class="back-btn">
+    ⬅ Back to Home
+</a>
+
+
 <script>
 
-document.querySelectorAll("video").forEach(function(video){
+function selectVideo(videoName){
 
-    video.style.cursor = "pointer";
+    localStorage.setItem(
+        "selectedDecoration",
+        videoName
+    );
 
-    video.onclick = function(){
+    localStorage.setItem(
+        "selectedService",
+        "Bride-Groom Entry"
+    );
 
-        localStorage.setItem(
-            "selectedDecoration",
-            video.querySelector("source").src
-        );
+    window.location.href =
+        "index.html#booking";
 
-        localStorage.setItem(
-            "selectedService",
-            "Bride-Groom Entry"
-        );
-
-        window.location.href =
-            "index.html#booking";
-
-    };
-
-});
+}
 
 </script>
+
 
 </body>
 </html>
