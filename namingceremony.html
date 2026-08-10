@@ -89,5 +89,31 @@ a:hover{
 
 </div>
 <a href="index.html">⬅ Back to Home</a>
+    <script>
+
+document.querySelectorAll(".gallery img").forEach(function(img){
+
+    img.style.cursor = "pointer";
+
+    img.onclick = function(){
+
+        localStorage.setItem(
+            "selectedDecoration",
+            img.src
+        );
+
+        localStorage.setItem(
+            "selectedService",
+            "Naming Ceremony Decoration"
+        );
+
+        window.location.href =
+            "index.html#booking";
+
+    };
+
+});
+
+</script>
 </body>
 </html>
