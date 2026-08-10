@@ -70,9 +70,32 @@
 
 <br><br>
 
-
-
 <a href="index.html">⬅ Back</a>
+<script>
 
+document.querySelectorAll("img").forEach(function(img){
+
+    img.style.cursor = "pointer";
+
+    img.onclick = function(){
+
+        localStorage.setItem(
+            "selectedDecoration",
+            img.src
+        );
+
+        localStorage.setItem(
+            "selectedService",
+            "Baby Shower Decoration"
+        );
+
+        window.location.href =
+            "index.html#booking";
+
+    };
+
+});
+
+</script>
 </body>
 </html>
