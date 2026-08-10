@@ -219,6 +219,20 @@ text-align:center;">
 <!-- Online Booking -->
 <section class="booking" id="booking">
     <h2>Online Booking</h2>
+    <div class="selected-photo-box">
+
+    <p>Selected Decoration Photo</p>
+
+    <img id="selectedPhoto"
+         src=""
+         alt="Selected Decoration Photo"
+         style="display:none;">
+
+    <p id="noPhoto">
+        Please select a decoration photo first.
+    </p>
+
+</div>
 
     <form onsubmit="sendBooking(); return false;">
 
@@ -267,7 +281,37 @@ text-align:center;">
 </section>
     <script>
 function sendBooking(){
-
+<script>    
+    
+window.addEventListener("load", function(){    
+    
+    let selectedPhoto =    
+        localStorage.getItem("selectedDecoration");    
+    
+    let selectedService =    
+        localStorage.getItem("selectedService");    
+    
+    if(selectedPhoto){    
+    
+        document.getElementById("selectedPhoto").src =    
+            selectedPhoto;    
+    
+        document.getElementById("selectedPhoto").style.display =    
+            "block";    
+    
+        document.getElementById("noPhoto").style.display =    
+            "none";    
+    }    
+    
+    if(selectedService){    
+    
+        document.getElementById("service").value =    
+            selectedService;    
+    }    
+    
+});    
+    
+</script> 
     let name = document.getElementById("name").value;
     let mobile = document.getElementById("mobile").value;
     let service = document.getElementById("service").value;
