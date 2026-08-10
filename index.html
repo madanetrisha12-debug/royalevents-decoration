@@ -219,21 +219,25 @@ text-align:center;">
 <!-- Online Booking -->
 <section class="booking" id="booking">
     <h2>Online Booking</h2>
-    <div class="selected-photo-box">
+    <div class="selected-media-box">
 
-    <p>Selected Decoration Photo</p>
+    <h3>Selected Decoration</h3>
 
     <img id="selectedPhoto"
          src=""
          alt="Selected Decoration Photo"
-         style="display:none;">
+         style="display:none; width:300px; max-width:100%; border-radius:10px;">
 
-    <p id="noPhoto">
-        Please select a decoration photo first.
+    <video id="selectedVideo"
+           controls
+           style="display:none; width:300px; max-width:100%; border-radius:10px;">
+    </video>
+
+    <p id="noMedia">
+        Please select a decoration photo or video first.
     </p>
 
 </div>
-
     <form onsubmit="sendBooking(); return false;">
 
         <input type="text" id="name" placeholder="Your Name" required>
@@ -286,25 +290,45 @@ window.addEventListener("load", function(){
     let selectedPhoto =
         localStorage.getItem("selectedDecoration");
 
+    let selectedVideo =
+        localStorage.getItem("selectedVideo");
+
     let selectedService =
         localStorage.getItem("selectedService");
 
+    let photo =
+        document.getElementById("selectedPhoto");
+
+    let video =
+        document.getElementById("selectedVideo");
+
+    let noMedia =
+        document.getElementById("noMedia");
+
     if(selectedPhoto){
 
-        document.getElementById("selectedPhoto").src =
-            selectedPhoto;
+        photo.src = selectedPhoto;
+        photo.style.display = "block";
 
-        document.getElementById("selectedPhoto").style.display =
-            "block";
+        video.style.display = "none";
+        noMedia.style.display = "none";
 
-        document.getElementById("noPhoto").style.display =
-            "none";
+    }
+    else if(selectedVideo){
+
+        video.src = selectedVideo;
+        video.style.display = "block";
+
+        photo.style.display = "none";
+        noMedia.style.display = "none";
+
     }
 
     if(selectedService){
 
         document.getElementById("service").value =
             selectedService;
+
     }
 
 });
@@ -312,15 +336,29 @@ window.addEventListener("load", function(){
 
 function sendBooking(){
 
-    let name = document.getElementById("name").value;
-    let mobile = document.getElementById("mobile").value;
-    let service = document.getElementById("service").value;
-    let date = document.getElementById("date").value;
-    let location = document.getElementById("location").value;
-    let message = document.getElementById("message").value;
+    let name =
+        document.getElementById("name").value;
+
+    let mobile =
+        document.getElementById("mobile").value;
+
+    let service =
+        document.getElementById("service").value;
+
+    let date =
+        document.getElementById("date").value;
+
+    let location =
+        document.getElementById("location").value;
+
+    let message =
+        document.getElementById("message").value;
 
     let selectedPhoto =
         localStorage.getItem("selectedDecoration");
+
+    let selectedVideo =
+        localStorage.getItem("selectedVideo");
 
     let bookingID =
         "RE" + Math.floor(100000 + Math.random() * 900000);
@@ -340,11 +378,23 @@ function sendBooking(){
         text +=
             "Selected Decoration Photo:\n" +
             selectedPhoto + "\n";
+
     }
 
-    let whatsappNumber = "917796774023";
+    if(selectedVideo){
 
-    alert("✅ Booking details तयार आहेत. WhatsApp उघडत आहे.");
+        text +=
+            "Selected Decoration Video:\n" +
+            selectedVideo + "\n";
+
+    }
+
+    let whatsappNumber =
+        "917796774023";
+
+    alert(
+        "✅ Booking details तयार आहेत. WhatsApp उघडत आहे."
+    );
 
     window.open(
         "https://wa.me/" +
