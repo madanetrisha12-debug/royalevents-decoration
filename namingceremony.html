@@ -91,15 +91,18 @@ a:hover{
 <a href="index.html">⬅ Back to Home</a>
     <script>
 
-document.querySelectorAll(".gallery img").forEach(function(img){
+document.querySelectorAll(".gallery video").forEach(function(video){
 
-    img.style.cursor = "pointer";
+    video.style.cursor = "pointer";
 
-    img.onclick = function(){
+    video.onclick = function(){
+
+        let source =
+            video.querySelector("source");
 
         localStorage.setItem(
-            "selectedDecoration",
-            img.src
+            "selectedVideo",
+            source.src
         );
 
         localStorage.setItem(
