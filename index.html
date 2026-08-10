@@ -279,45 +279,48 @@ text-align:center;">
     <button>Book on WhatsApp</button>
 </a>
 </section>
-    <script>
+<script>
+
+window.addEventListener("load", function(){
+
+    let selectedPhoto =
+        localStorage.getItem("selectedDecoration");
+
+    let selectedService =
+        localStorage.getItem("selectedService");
+
+    if(selectedPhoto){
+
+        document.getElementById("selectedPhoto").src =
+            selectedPhoto;
+
+        document.getElementById("selectedPhoto").style.display =
+            "block";
+
+        document.getElementById("noPhoto").style.display =
+            "none";
+    }
+
+    if(selectedService){
+
+        document.getElementById("service").value =
+            selectedService;
+    }
+
+});
+
+
 function sendBooking(){
-<script>    
-    
-window.addEventListener("load", function(){    
-    
-    let selectedPhoto =    
-        localStorage.getItem("selectedDecoration");    
-    
-    let selectedService =    
-        localStorage.getItem("selectedService");    
-    
-    if(selectedPhoto){    
-    
-        document.getElementById("selectedPhoto").src =    
-            selectedPhoto;    
-    
-        document.getElementById("selectedPhoto").style.display =    
-            "block";    
-    
-        document.getElementById("noPhoto").style.display =    
-            "none";    
-    }    
-    
-    if(selectedService){    
-    
-        document.getElementById("service").value =    
-            selectedService;    
-    }    
-    
-});    
-    
-</script> 
+
     let name = document.getElementById("name").value;
     let mobile = document.getElementById("mobile").value;
     let service = document.getElementById("service").value;
     let date = document.getElementById("date").value;
     let location = document.getElementById("location").value;
     let message = document.getElementById("message").value;
+
+    let selectedPhoto =
+        localStorage.getItem("selectedDecoration");
 
     let bookingID =
         "RE" + Math.floor(100000 + Math.random() * 900000);
@@ -330,7 +333,14 @@ window.addEventListener("load", function(){
         "Service: " + service + "\n" +
         "Event Date: " + date + "\n" +
         "Location: " + location + "\n" +
-        "Requirement: " + message;
+        "Requirement: " + message + "\n\n";
+
+    if(selectedPhoto){
+
+        text +=
+            "Selected Decoration Photo:\n" +
+            selectedPhoto + "\n";
+    }
 
     let whatsappNumber = "917796774023";
 
@@ -343,7 +353,9 @@ window.addEventListener("load", function(){
         encodeURIComponent(text),
         "_blank"
     );
+
 }
+
 </script>
 
 </body>
