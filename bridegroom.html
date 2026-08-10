@@ -121,22 +121,32 @@ onclick="selectVideo('bridegroom4.mp4.mp4')">
 
 <script>
 
-function selectVideo(videoName){
+document.querySelectorAll("video").forEach(function(video){
 
-    localStorage.setItem(
-        "selectedDecoration",
-        videoName
-    );
+    video.style.cursor = "pointer";
 
-    localStorage.setItem(
-        "selectedService",
-        "Bride-Groom Entry"
-    );
+    video.onclick = function(){
 
-    window.location.href =
-        "index.html#booking";
+        let source = video.querySelector("source");
 
-}
+        localStorage.setItem(
+            "selectedVideo",
+            source.src
+        );
+
+        localStorage.removeItem("selectedDecoration");
+
+        localStorage.setItem(
+            "selectedService",
+            "Bride-Groom Entry"
+        );
+
+        window.location.href =
+            "index.html#booking";
+
+    };
+
+});
 
 </script>
 
