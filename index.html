@@ -396,21 +396,20 @@ let bookingID =
 
     }
 
-    let whatsappNumber =
-        "917796774023";
-    alert(
+   let whatsappNumber = "917796774023";
+
+let whatsappURL =
+    "https://wa.me/" +
+    whatsappNumber +
+    "?text=" +
+    encodeURIComponent(text);
+
+alert(
     "✅ Booking Confirmed!\n\n" +
-    "Booking ID: " + bookingID + "\n" +
-    "Thank you for choosing The Royal Events!"
+    "Booking ID: " + bookingID
 );
 
-    window.open(
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        encodeURIComponent(text),
-        "_blank"
-    );
+window.location.href = whatsappURL;
 
 }
 
