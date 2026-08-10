@@ -126,21 +126,41 @@ document.querySelectorAll("img").forEach(function(img){
 
     img.onclick = function(){
 
-        localStorage.setItem(
-            "selectedDecoration",
-            img.src
-        );
+        localStorage.setItem("selectedDecoration", img.src);
+        localStorage.removeItem("selectedVideo");
 
         localStorage.setItem(
             "selectedService",
             "Birthday Party Decoration"
         );
 
-        window.location.href =
-            "index.html#booking";
+        window.location.href = "index.html#booking";
+    };
 
+});
+
+
+document.querySelectorAll("video").forEach(function(video){
+
+    video.style.cursor = "pointer";
+
+    video.onclick = function(){
+
+        let source = video.querySelector("source");
+
+        localStorage.setItem("selectedVideo", source.src);
+        localStorage.removeItem("selectedDecoration");
+
+        localStorage.setItem(
+            "selectedService",
+            "Birthday Party Decoration"
+       );
+
+        window.location.href = "index.html#booking";
     };
 
 });
 
 </script>
+
+
