@@ -257,32 +257,27 @@ text-align:center;">
             <option>Mehandi Decoration</option>
             <option>Baby Welcome Decoration</option>
             <option>Naming Ceremony Decoration</option>
-        </select>
+       <script type="module">
 
-        <input type="date" id="date" required>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {
+    getFirestore,
+    collection,
+    addDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-        <input type="text" id="location" placeholder="Event Location" required>
+const firebaseConfig = {
+    apiKey: "AIzaSyBQ3VaEXDkNC559MqQXTV8D_Ju5UtF_EvQ",
+    authDomain: "the-royal-events-ebc7b.firebaseapp.com",
+    projectId: "the-royal-events-ebc7b",
+    storageBucket: "the-royal-events-ebc7b.firebasestorage.app",
+    messagingSenderId: "495660292303",
+    appId: "1:495660292303:web:b49e633791df627baa3fba"
+};
 
-        <textarea id="message" placeholder="Additional Requirements"></textarea>
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-        <button type="submit">Submit Booking</button>
-
-    </form>
-</section>
-
-<!-- Contact -->
-<section class="contact" id="contact">
-    <h2>Contact Us</h2>
-<section class="contact" id="contact">
-    <p>📞 7796774023</p>
-    <p> Sangli,Maharashtra</P>
-    <p> royalevents@gmail.com</p>
-    <p>Royal Events - The Perfect Event Planner</p>
-    <a href="https://wa.me/917796774023">
-    <button>Book on WhatsApp</button>
-</a>
-</section>
-<script>
 
 window.addEventListener("load", function(){
 
@@ -333,7 +328,7 @@ window.addEventListener("load", function(){
 });
 
 
-function sendBooking(){
+window.sendBooking = async function(){
 
     let name =
         document.getElementById("name").value;
@@ -354,66 +349,106 @@ function sendBooking(){
         document.getElementById("message").value;
 
     let selectedPhoto =
-        localStorage.getItem("selectedDecoration");
+        localStorage.getItem("selectedDecoration") || "";
 
     let selectedVideo =
-        localStorage.getItem("selectedVideo");
+        localStorage.getItem("selectedVideo") || "";
+
 
     let bookingNumber =
-    parseInt(localStorage.getItem("bookingNumber") || "0") + 1;
+        parseInt(
+            localStorage.getItem("bookingNumber") || "0"
+        ) + 1;
 
-localStorage.setItem(
-    "bookingNumber",
-    bookingNumber
-);
+    localStorage.setItem(
+        "bookingNumber",
+        bookingNumber
+    );
 
-let bookingID =
-    "RE-" + String(bookingNumber).padStart(2, "0");
+    let bookingID =
+        "RE-" + String(bookingNumber).padStart(2, "0");
 
-    let text =
-        "NEW BOOKING - THE ROYAL EVENTS\n\n" +
-        "Booking ID: " + bookingID + "\n" +
-        "Name: " + name + "\n" +
-        "Mobile: " + mobile + "\n" +
-        "Service: " + service + "\n" +
-        "Event Date: " + date + "\n" +
-        "Location: " + location + "\n" +
-        "Requirement: " + message + "\n\n";
 
-    if(selectedPhoto){
+    try {
 
-        text +=
-            "Selected Decoration Photo:\n" +
-            selectedPhoto + "\n";
+        await addDoc(
+            collection(db, "booking"),
+            {
+                bookingID: bookingID,
+                name: name,
+                mobile: mobile,
+                service: service,
+                date: date,
+                location: location,
+                message: message,
+                selectedPhoto: selectedPhoto,
+                selectedVideo: selectedVideo,
+                createdAt: new Date().toISOString()
+            }
+        );
+
+
+        let text =
+            "NEW BOOKING - THE ROYAL EVENTS\n\n" +
+            "Booking ID: " + bookingID + "\n" +
+            "Name: " + name + "\n" +
+            "Mobile: " + mobile + "\n" +
+            "Service: " + service + "\n" +
+            "Event Date: " + date + "\n" +
+            "Location: " + location + "\n" +
+            "Requirement: " + message + "\n\n";
+
+
+        if(selectedPhoto){
+
+            text +=
+                "Selected Decoration Photo:\n" +
+                selectedPhoto + "\n";
+
+        }
+
+        if(selectedVideo){
+
+            text +=
+                "Selected Decoration Video:\n" +
+                selectedVideo + "\n";
+
+        }
+
+
+        let whatsappNumber =
+            "917796774023";
+
+        let whatsappURL =
+            "https://wa.me/" +
+            whatsappNumber +
+            "?text=" +
+            encodeURIComponent(text);
+
+
+        alert(
+            "✅ Booking Confirmed!\n\n" +
+            "Booking ID: " + bookingID
+        );
+
+
+        window.location.href =
+            whatsappURL;
+
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Booking Firebase मध्ये save झाली नाही."
+        );
 
     }
 
-    if(selectedVideo){
-
-        text +=
-            "Selected Decoration Video:\n" +
-            selectedVideo + "\n";
-
-    }
-
-   let whatsappNumber = "917796774023";
-
-let whatsappURL =
-    "https://wa.me/" +
-    whatsappNumber +
-    "?text=" +
-    encodeURIComponent(text);
-
-alert(
-    "✅ Booking Confirmed!\n\n" +
-    "Booking ID: " + bookingID
-);
-
-window.location.href = whatsappURL;
-
-}
+};
 
 </script>
-
-</body>
-</html>
+        
+          </body>
+        </html>
