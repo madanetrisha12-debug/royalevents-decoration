@@ -433,7 +433,7 @@ async function loadBookings(){
 
         const querySnapshot =
         await getDocs(
-            collection(db,"bookings")
+            collection(db,"booking")
         );
 
 
@@ -577,7 +577,7 @@ window.changeStatus = async function(
     try{
 
         await updateDoc(
-            doc(db,"bookings",bookingId),
+            doc(db,"booking",bookingId),
             {
                 status:newStatus
             }
