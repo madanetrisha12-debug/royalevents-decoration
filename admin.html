@@ -248,7 +248,17 @@ th{
 <div class="dashboard-content">
 
 <h2>Booking Dashboard</h2>
+<h2>📷 Add Decoration Photo</h2>
 
+<input type="file" id="decorationPhoto" accept="image/*">
+
+<br><br>
+
+<button onclick="uploadDecoration()">
+    Upload Photo
+</button>
+
+<p id="uploadMessage"></p>
 <br>
 
 
@@ -322,7 +332,8 @@ Loading bookings...
 </div>
 
 </div>
-
+<script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+    
 
 <script type="module">
 
@@ -341,7 +352,8 @@ import {
     collection,
     getDocs,
     doc,
-    updateDoc
+    updateDoc,
+    addDoc
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
@@ -555,6 +567,55 @@ async function loadBookings(){
     }
 
 }
+    window.uploadDecoration = function(){
+
+    const photo =
+    document.getElementById("decorationPhoto").files[0];
+
+    const message =
+    document.getElementById("uploadMessage");
+
+    if(!photo){
+        message.innerText = "Photo select करा.";
+        return;
+    }
+
+    message.innerText = "Uploading...";
+
+    const widget = cloudinary.createUploadWidget(
+        {
+            cloudName: "vu5cbesg",
+            uploadPreset: "royal_events_upload",
+            sources: ["local"],
+            multiple: false
+        },
+        async function(error, result){
+
+            if(error){
+                console.error(error);
+                message.innerText = "Upload failed.";
+                return;
+            }
+
+            if(result.event === "success"){
+
+                await addDoc(
+                    collection(db, "decorations"),
+                    {
+                        imageUrl: result.info.secure_url,
+                        createdAt: new Date()
+                    }
+                );
+
+                message.innerText =
+                "Photo successfully uploaded!";
+
+            }
+        }
+    );
+
+    widget.open();
+};
 
 
 /* CHANGE STATUS */
