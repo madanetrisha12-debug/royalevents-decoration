@@ -1,38 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Engagement Decoration</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    text-align:center;
+}
+
+h1{
+    background:#c2185b;
+    color:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+img, video{
+    width:300px;
+    height:220px;
+    max-width:90%;
+    object-fit:cover;
+    margin:10px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+    cursor:pointer;
+}
+
+#firebasePhotos,
+#firebaseVideos{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.back{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 20px;
+    background:#6b3e26;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>💖 Engagement Decoration💖</h1>
-
-<img src="engagement1.jpeg.jpeg"width="300">
-<img src="engagement2.jpeg.jpeg"width="300">
-<img src="engagement3.jpeg.jpeg"width="300">
-<img src="engagement4.jpeg.jpeg"width="300">
-<img src="engagement5.jpeg.jpeg""width="300">
-<img src="engagement6.jpeg.jpeg"width="300">
-<img src="engagement7.jpeg.jpeg"width="300">
+<h1>💖 Engagement Decoration 💖</h1>
 
 
-<video controls width="200">
+<!-- OLD PHOTOS -->
+
+<img src="engagement1.jpeg.jpeg">
+<img src="engagement2.jpeg.jpeg">
+<img src="engagement3.jpeg.jpeg">
+<img src="engagement4.jpeg.jpeg">
+<img src="engagement5.jpeg.jpeg">
+<img src="engagement6.jpeg.jpeg">
+<img src="engagement7.jpeg.jpeg">
+
+
+<!-- OLD VIDEO -->
+
+<video controls>
     <source src="engagement.mp4" type="video/mp4">
-
 </video>
 
-<br><br>
+
+<h2>New Photos & Videos</h2>
+
+<p id="loading">
+Loading new photos and videos...
+</p>
+
+<div id="firebasePhotos"></div>
+
+<div id="firebaseVideos"></div>
 
 
-<a href="index.html" class="back">⬅ Back to Home</a>
+<br>
+
+<a href="index.html" class="back">
+⬅ Back to Home
+</a>
+
 
 <script>
 
-document.querySelectorAll("img").forEach(function(img){
+/* OLD PHOTOS */
 
-    img.style.cursor = "pointer";
+document.querySelectorAll("img").forEach(function(img){
 
     img.onclick = function(){
 
@@ -41,46 +110,268 @@ document.querySelectorAll("img").forEach(function(img){
             img.src
         );
 
-        localStorage.removeItem("selectedVideo");
+        localStorage.removeItem(
+            "selectedVideo"
+        );
 
         localStorage.setItem(
             "selectedService",
             "Engagement Decoration"
         );
 
-        window.location.href = "index.html#booking";
+        window.location.href =
+            "index.html#booking";
 
     };
 
 });
 
 
-document.querySelectorAll("video").forEach(function(video){
+/* OLD VIDEO */
 
-    video.style.cursor = "pointer";
+document.querySelectorAll("video").forEach(function(video){
 
     video.onclick = function(){
 
-        let source = video.querySelector("source");
+        let source =
+            video.querySelector("source");
 
         localStorage.setItem(
             "selectedVideo",
             source.src
         );
 
-        localStorage.removeItem("selectedDecoration");
+        localStorage.removeItem(
+            "selectedDecoration"
+        );
 
         localStorage.setItem(
             "selectedService",
             "Engagement Decoration"
         );
 
-        window.location.href = "index.html#booking";
+        window.location.href =
+            "index.html#booking";
 
     };
 
 });
 
 </script>
+
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyBQ3VaEXDkNC559MqQXTV8D_Ju5UtF_EvQ",
+
+    authDomain:
+    "the-royal-events-ebc7b.firebaseapp.com",
+
+    projectId:
+    "the-royal-events-ebc7b",
+
+    storageBucket:
+    "the-royal-events-ebc7b.firebasestorage.app",
+
+    messagingSenderId:
+    "495660292303",
+
+    appId:
+    "1:495660292303:web:b49e633791df627baa3fba"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+async function loadFirebaseContent(){
+
+    const photoContainer =
+        document.getElementById(
+            "firebasePhotos"
+        );
+
+    const videoContainer =
+        document.getElementById(
+            "firebaseVideos"
+        );
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "decorations"
+                )
+            );
+
+
+        let found = false;
+
+
+        snapshot.forEach(function(photoDoc){
+
+            const data =
+                photoDoc.data();
+
+
+            if(
+                data.service ===
+                "Engagement decoration"
+            ){
+
+                found = true;
+
+
+                /* PHOTO */
+
+                if(data.type === "image"){
+
+                    const img =
+                        document.createElement(
+                            "img"
+                        );
+
+                    img.src =
+                        data.imageUrl;
+
+
+                    img.onclick =
+                        function(){
+
+                            localStorage.setItem(
+                                "selectedDecoration",
+                                img.src
+                            );
+
+                            localStorage.removeItem(
+                                "selectedVideo"
+                            );
+
+                            localStorage.setItem(
+                                "selectedService",
+                                "Engagement Decoration"
+                            );
+
+                            window.location.href =
+                                "index.html#booking";
+
+                        };
+
+
+                    photoContainer.appendChild(
+                        img
+                    );
+
+                }
+
+
+                /* VIDEO */
+
+                if(data.type === "video"){
+
+                    const video =
+                        document.createElement(
+                            "video"
+                        );
+
+                    video.controls = true;
+
+                    video.src =
+                        data.imageUrl;
+
+
+                    video.onclick =
+                        function(){
+
+                            localStorage.setItem(
+                                "selectedVideo",
+                                video.src
+                            );
+
+                            localStorage.removeItem(
+                                "selectedDecoration"
+                            );
+
+                            localStorage.setItem(
+                                "selectedService",
+                                "Engagement Decoration"
+                            );
+
+                            window.location.href =
+                                "index.html#booking";
+
+                        };
+
+
+                    videoContainer.appendChild(
+                        video
+                    );
+
+                }
+
+            }
+
+        });
+
+
+        if(found){
+
+            loading.innerText =
+                "New photos and videos";
+
+        }else{
+
+            loading.innerText =
+                "No new photos or videos yet.";
+
+        }
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        loading.innerText =
+            "Unable to load new photos and videos.";
+
+    }
+
+}
+
+
+loadFirebaseContent();
+
+</script>
+
 </body>
 </html>
