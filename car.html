@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Car Decoration</title>
+
+<title>Wedding Car Decoration</title>
 
 <style>
+
 body{
     margin:0;
     padding:20px;
@@ -21,13 +24,22 @@ h1{
     border-radius:10px;
 }
 
-img{
+img, video{
     width:300px;
     height:220px;
+    max-width:90%;
     object-fit:cover;
     margin:10px;
     border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,0.3);
+    cursor:pointer;
+}
+
+#firebasePhotos,
+#firebaseVideos{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
 }
 
 .back-btn{
@@ -39,63 +51,17 @@ img{
     text-decoration:none;
     border-radius:5px;
 }
+
 </style>
 
 </head>
+
 <body>
 
-<h1>🚗Wedding Car Decoration</h1>
+<h1>🚗 Wedding Car Decoration 🚗</h1>
+
+
+<!-- OLD PHOTOS -->
 
 <img src="car1.jpeg.jpeg">
 <img src="car2.jpeg.jpeg">
-<img src="car3.jpeg.jpeg">
-<img src="car4.jpeg.jpeg">
-<img src="car5.jpeg.jpeg">
-<img src="car6.jpeg.jpeg">
-<img src="car7.jpeg.jpeg">
-<img src="car8.jpeg.jpeg">
-<img src="car9.jpeg.jpeg">
-<img src="car10.jpeg.jpeg">
-<img src="car11.jpeg.jpeg">
-<img src="car12.jpeg.jpeg">
-<img src="car13.jpeg.jpeg">
-<img src="car14.jpeg.jpeg">
-<img src="car15.jpeg.jpeg">
-<img src="car16.jpeg.jpeg">
-<img src="car17.jpeg.jpeg">
-<img src="car18.jpeg.jpeg">
-<img src="car19.jpeg.jpeg">
-<img src="car20.jpeg.jpeg">
-<img src="car21.jpeg.jpeg">
-<img src="car22.jpeg.jpeg">
-
-<br><br>
-<a href="index.html" class="back-btn">⬅ Back to Home</a>
-<script>
-
-document.querySelectorAll("img").forEach(function(img){
-
-    img.style.cursor = "pointer";
-
-    img.onclick = function(){
-
-        localStorage.setItem(
-            "selectedDecoration",
-            img.src
-        );
-
-        localStorage.setItem(
-            "selectedService",
-            "Wedding Car Decoration"
-        );
-
-        window.location.href =
-            "index.html#booking";
-
-    };
-
-});
-
-</script>
-</body>
-</html>
