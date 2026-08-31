@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Birthday Party Decoration</title>
 
 <style>
+
 body{
     margin:0;
     padding:20px;
@@ -13,20 +16,32 @@ body{
     background:#f5f5f5;
     text-align:center;
 }
+
 h1{
     background:hotpink;
     color:white;
     padding:20px;
     border-radius:10px;
 }
-img{
+
+img, video{
     width:300px;
     height:220px;
+    max-width:90%;
     object-fit:cover;
     margin:10px;
     border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,0.3);
+    cursor:pointer;
 }
+
+#firebasePhotos,
+#firebaseVideos{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
 .back-btn{
     display:inline-block;
     margin-top:20px;
@@ -36,13 +51,17 @@ img{
     text-decoration:none;
     border-radius:5px;
 }
+
 </style>
 
 </head>
-<h1>🎂 Birthday Party Decoration🎂</h1>
+
+<body>
+
+<h1>🎂 Birthday Party Decoration 🎂</h1>
 
 
-<!-- Photos -->
+<!-- OLD PHOTOS -->
 
 <img src="birthday1.jpeg.jpeg">
 <img src="birthday2.jpeg.jpeg">
@@ -98,65 +117,133 @@ img{
 <img src="birthday52.jpeg.jpeg">
 
 
+<!-- OLD VIDEOS -->
+
+<video controls>
+    <source src="birthday1.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday2.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday3.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday4.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday5.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday6.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday7.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday8.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday9.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday10.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday11.mp4.mp4" type="video/mp4">
+</video>
+
+<video controls>
+    <source src="birthday12.mp4.mp4" type="video/mp4">
+</video>
+
+
+<!-- FIREBASE CONTENT -->
+
+<h2>New Photos & Videos</h2>
+
+<p id="loading">
+Loading new photos and videos...
+</p>
+
+<div id="firebasePhotos"></div>
+
+<div id="firebaseVideos"></div>
+
+
 <br><br>
 
-<!-- Videos -->
+<a href="index.html" class="back-btn">
+⬅ Back to Home
+</a>
 
-<video controls><source src="birthday1.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday2.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday3.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday4.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday5.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday6.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday7.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday8.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday9.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday10.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday11.mp4.mp4" type="video/mp4"></video>
-<video controls><source src="birthday12.mp4.mp4" type="video/mp4"></video>
 
-<br><br>
+<script>
 
-<a href="index.html">⬅ Back to Home</a>
-    <script>
+/* OLD PHOTOS */
 
 document.querySelectorAll("img").forEach(function(img){
 
-    img.style.cursor = "pointer";
-
     img.onclick = function(){
 
-        localStorage.setItem("selectedDecoration", img.src);
-        localStorage.removeItem("selectedVideo");
+        localStorage.setItem(
+            "selectedDecoration",
+            img.src
+        );
+
+        localStorage.removeItem(
+            "selectedVideo"
+        );
 
         localStorage.setItem(
             "selectedService",
             "Birthday Party Decoration"
         );
 
-        window.location.href = "index.html#booking";
+        window.location.href =
+            "index.html#booking";
+
     };
 
 });
 
 
-document.querySelectorAll("video").forEach(function(video){
+/* OLD VIDEOS */
 
-    video.style.cursor = "pointer";
+document.querySelectorAll("video").forEach(function(video){
 
     video.onclick = function(){
 
-        let source = video.querySelector("source");
+        let source =
+            video.querySelector("source");
 
-        localStorage.setItem("selectedVideo", source.src);
-        localStorage.removeItem("selectedDecoration");
+        localStorage.setItem(
+            "selectedVideo",
+            source.src
+        );
+
+        localStorage.removeItem(
+            "selectedDecoration"
+        );
 
         localStorage.setItem(
             "selectedService",
             "Birthday Party Decoration"
-       );
+        );
 
-        window.location.href = "index.html#booking";
+        window.location.href =
+            "index.html#booking";
+
     };
 
 });
@@ -164,3 +251,89 @@ document.querySelectorAll("video").forEach(function(video){
 </script>
 
 
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyBQ3VaEXDkNC559MqQXTV8D_Ju5UtF_EvQ",
+
+    authDomain:
+    "the-royal-events-ebc7b.firebaseapp.com",
+
+    projectId:
+    "the-royal-events-ebc7b",
+
+    storageBucket:
+    "the-royal-events-ebc7b.firebasestorage.app",
+
+    messagingSenderId:
+    "495660292303",
+
+    appId:
+    "1:495660292303:web:b49e633791df627baa3fba"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+async function loadFirebaseContent(){
+
+    const photoContainer =
+        document.getElementById(
+            "firebasePhotos"
+        );
+
+    const videoContainer =
+        document.getElementById(
+            "firebaseVideos"
+        );
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "decorations"
+                )
+            );
+
+
+        let found = false;
+
+
+        snapshot.forEach(function(decorationDoc){
+
+            const data =
+                decorationDoc.data();
+
+
+            if(
+                data.service ===
+                "Birthday party
