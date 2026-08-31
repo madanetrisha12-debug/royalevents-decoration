@@ -1,40 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Haldi Decoration</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    text-align:center;
+}
+
+h1{
+    background:#d4a017;
+    color:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+img, video{
+    width:250px;
+    height:220px;
+    object-fit:cover;
+    margin:10px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+    cursor:pointer;
+}
+
+#firebasePhotos,
+#firebaseVideos{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+#loading{
+    font-size:18px;
+}
+
+.back{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 20px;
+    background:#6b3e26;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h1>🌼 Haldi Decoration</h1>
+<h1>🌼 Haldi Decoration 🌼</h1>
 
-<h1>Haldi Decoration</h1>
 
-<img src="haldi1.jpeg.jpeg"width="250">
-<img src="haldi2.jpeg.jpeg"width="250">
-<img src="haldi3.jpeg.jpeg"width="250">
-<img src="haldi4.jpeg.jpeg"width="250">
-<img src="haldi5.jpeg.jpeg"width="250">
-<img src="haldi6.jpeg.jpeg"width="250">
-<img src="haldi7.jpeg.jpeg"width="250">
-<img src="haldi8.jpeg.jpeg"width="250">
-<img src="haldi9.jpeg.jpeg"width="250">
+<!-- OLD PHOTOS -->
+
+<img src="haldi1.jpeg.jpeg">
+<img src="haldi2.jpeg.jpeg">
+<img src="haldi3.jpeg.jpeg">
+<img src="haldi4.jpeg.jpeg">
+<img src="haldi5.jpeg.jpeg">
+<img src="haldi6.jpeg.jpeg">
+<img src="haldi7.jpeg.jpeg">
+<img src="haldi8.jpeg.jpeg">
+<img src="haldi9.jpeg.jpeg">
+
+
+<!-- OLD VIDEO -->
 
 <video controls>
     <source src="haldi.mp4.mp4" type="video/mp4">
 </video>
 
+
+<!-- FIREBASE CONTENT -->
+
+<h2>New Photos & Videos</h2>
+
+<p id="loading">Loading new photos and videos...</p>
+
+<div id="firebasePhotos"></div>
+
+<div id="firebaseVideos"></div>
+
+
 <br><br>
 
-<a href="index.html" class="back">⬅ Back to Home</a>
+<a href="index.html" class="back">
+⬅ Back to Home
+</a>
+
+
+<!-- OLD PHOTO CLICK -->
 
 <script>
 
 document.querySelectorAll("img").forEach(function(img){
-
-    img.style.cursor = "pointer";
 
     img.onclick = function(){
 
@@ -43,7 +115,9 @@ document.querySelectorAll("img").forEach(function(img){
             img.src
         );
 
-        localStorage.removeItem("selectedVideo");
+        localStorage.removeItem(
+            "selectedVideo"
+        );
 
         localStorage.setItem(
             "selectedService",
@@ -58,20 +132,23 @@ document.querySelectorAll("img").forEach(function(img){
 });
 
 
-document.querySelectorAll("video").forEach(function(video){
+<!-- OLD VIDEO CLICK -->
 
-    video.style.cursor = "pointer";
+document.querySelectorAll("video").forEach(function(video){
 
     video.onclick = function(){
 
-        let source = video.querySelector("source");
+        let source =
+            video.querySelector("source");
 
         localStorage.setItem(
             "selectedVideo",
             source.src
         );
 
-        localStorage.removeItem("selectedDecoration");
+        localStorage.removeItem(
+            "selectedDecoration"
+        );
 
         localStorage.setItem(
             "selectedService",
@@ -86,5 +163,11 @@ document.querySelectorAll("video").forEach(function(video){
 });
 
 </script>
-</body>
-</html>
+
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+from "
