@@ -588,9 +588,17 @@ async function loadBookings(){
 
 }
     window.uploadDecoration = function(){
+        
 
     const photo =
     document.getElementById("decorationPhoto").files[0];
+        const service =
+    document.getElementById("decorationService").value;
+
+if(!service){
+    message.innerText = "Please select a service.";
+    return;
+}
 
     const message =
     document.getElementById("uploadMessage");
