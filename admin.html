@@ -587,26 +587,27 @@ async function loadBookings(){
     }
 
 }
-     window.uploadDecoration = function(){
-        
+    window.uploadDecoration = function(){
 
     const photo =
-    document.getElementById("decorationPhoto").files[0];
-        const service =
-    document.getElementById("decorationService").value;
+        document.getElementById("decorationPhoto").files[0];
 
-const message =
-    document.getElementById("uploadMessage");
+    const service =
+        document.getElementById("decorationService").value;
 
-if(!service){
-    message.innerText = "Please select a service.";
-    return;
-}
+    const message =
+        document.getElementById("uploadMessage");
+
+    if(!service){
+        message.innerText = "Please select a service.";
+        return;
+    }
 
     if(!photo){
         message.innerText = "Photo select करा.";
         return;
     }
+
     message.innerText = "Uploading...";
 
     const widget = cloudinary.createUploadWidget(
@@ -616,6 +617,7 @@ if(!service){
             sources: ["local"],
             multiple: false
         },
+
         async function(error, result){
 
             if(error){
@@ -626,24 +628,38 @@ if(!service){
 
             if(result.event === "success"){
 
-                await addDoc(
-                    collection(db, "decorations"),
-                    {
-                        imageUrl: result.info.secure_url,
-                        createdAt: new Date()
-                    }
-                );
+                try{
 
-                message.innerText =
-                "Photo successfully uploaded!";
+                    await addDoc(
+                        collection(db, "decorations"),
+                        {
+                            imageUrl: result.info.secure_url,
+                            service: service,
+                            createdAt: new Date()
+                        }
+                    );
 
+                    message.innerText =
+                        "Photo successfully uploaded!";
+
+                    document.getElementById("decorationPhoto").value = "";
+
+                    document.getElementById("decorationService").value = "";
+
+                }catch(error){
+
+                    console.error(error);
+
+                    message.innerText =
+                        "Firebase save failed.";
+
+                }
             }
         }
     );
 
     widget.open();
 };
-
 
 /* CHANGE STATUS */
 
