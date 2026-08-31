@@ -595,13 +595,13 @@ async function loadBookings(){
         const service =
     document.getElementById("decorationService").value;
 
+const message =
+    document.getElementById("uploadMessage");
+
 if(!service){
     message.innerText = "Please select a service.";
     return;
 }
-
-    const message =
-    document.getElementById("uploadMessage");
 
     if(!photo){
         message.innerText = "Photo select करा.";
