@@ -611,56 +611,58 @@ async function loadBookings(){
     message.innerText = "Uploading...";
 
     const widget = cloudinary.createUploadWidget(
-        {
-            cloudName: "vu5cbesg",
-            uploadPreset: "royal_events_upload",
-            sources: ["local"],
-            multiple: false
-        },
+    {
+        cloudName: "vu5cbesg",
+        uploadPreset: "royal_events_upload",
+        sources: ["local"],
+        multiple: false
+    },
 
-        async function(error, result){
+    async function(error, result){
 
-            if(error){
-                console.error(error);
-                message.innerText = "Upload failed.";
-                return;
+        if(error){
+            console.error(error);
+            message.innerText = "Upload failed.";
+            return;
+        }
+
+        if(result.event === "success"){
+
+            try{
+
+                await addDoc(
+                    collection(db, "decorations"),
+                    {
+                        imageUrl: result.info.secure_url,
+                        service: service,
+                        type: result.info.resource_type,
+                        createdAt: new Date()
+                    }
+                );
+
+                message.innerText =
+                    result.info.resource_type === "video"
+                    ? "Video successfully uploaded!"
+                    : "Photo successfully uploaded!";
+
+                document.getElementById("decorationPhoto").value = "";
+
+                document.getElementById("decorationService").value = "";
+
             }
+            catch(error){
 
-            if(result.event === "success"){
+                console.error(error);
 
-                try{
+                message.innerText =
+                    "Firebase save failed.";
 
-                    await addDoc(
-                        collection(db, "decorations"),
-                        {
-                            imageUrl: result.info.secure_url,
-                            service: service,
-                            createdAt: new Date()
-                        }
-                    );
-
-                    message.innerText =
-                        "Photo successfully uploaded!";
-
-                    document.getElementById("decorationPhoto").value = "";
-
-                    document.getElementById("decorationService").value = "";
-
-                }catch(error){
-
-                    console.error(error);
-
-                    message.innerText =
-                        "Firebase save failed.";
-
-                }
             }
         }
-    );
+    }
+);
 
-    widget.open();
-};
-
+widget.open();
 /* CHANGE STATUS */
 
 window.changeStatus = async function(
