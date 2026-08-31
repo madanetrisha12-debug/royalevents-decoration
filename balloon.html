@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Balloon Decoration</title>
 
 <style>
+
 body{
     margin:0;
     padding:20px;
@@ -13,12 +15,14 @@ body{
     background:#f5f5f5;
     text-align:center;
 }
+
 h1{
     background:#800080;
     color:white;
     padding:20px;
     border-radius:10px;
 }
+
 img{
     width:300px;
     height:220px;
@@ -26,7 +30,9 @@ img{
     margin:10px;
     border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,0.3);
+    cursor:pointer;
 }
+
 .back-btn{
     display:inline-block;
     margin-top:20px;
@@ -36,13 +42,27 @@ img{
     text-decoration:none;
     border-radius:5px;
 }
+
+#firebasePhotos{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+#loading{
+    font-size:18px;
+    margin:20px;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<h1>🎈Balloon Decoration>🎈</h1>
+<h1>🎈 Balloon Decoration 🎈</h1>
+
+<!-- OLD PHOTOS -->
 
 <img src="balloon1.jpeg.jpeg">
 <img src="balloon2.jpeg.jpeg">
@@ -111,13 +131,28 @@ img{
 <img src="balloon66.jpeg.jpeg">
 <img src="balloon67.jpeg.jpeg">
 
+
+<!-- NEW FIREBASE PHOTOS -->
+
+<h2>New Photos</h2>
+
+<p id="loading">Loading new photos...</p>
+
+<div id="firebasePhotos"></div>
+
+
 <br><br>
 
-<a href="index.html" class="back-btn">⬅ Back to Home</a>
-<script>
-document.querySelectorAll("img").forEach(function(img){
+<a href="index.html" class="back-btn">
+⬅ Back to Home
+</a>
 
-    img.style.cursor = "pointer";
+
+<!-- OLD PHOTO CLICK -->
+
+<script>
+
+document.querySelectorAll("img").forEach(function(img){
 
     img.onclick = function(){
 
@@ -131,10 +166,147 @@ document.querySelectorAll("img").forEach(function(img){
             "Balloon Decoration"
         );
 
-        window.location.href = "index.html#booking";
+        window.location.href =
+            "index.html#booking";
+
     };
 
 });
+
 </script>
+
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyBQ3VaEXDkNC559MqQXTV8D_Ju5UtF_EvQ",
+
+    authDomain:
+    "the-royal-events-ebc7b.firebaseapp.com",
+
+    projectId:
+    "the-royal-events-ebc7b",
+
+    storageBucket:
+    "the-royal-events-ebc7b.firebasestorage.app",
+
+    messagingSenderId:
+    "495660292303",
+
+    appId:
+    "1:495660292303:web:b49e633791df627baa3fba"
+
+};
+
+
+const app =
+initializeApp(firebaseConfig);
+
+
+const db =
+getFirestore(app);
+
+
+async function loadFirebasePhotos(){
+
+    const container =
+    document.getElementById("firebasePhotos");
+
+    const loading =
+    document.getElementById("loading");
+
+    try{
+
+        const snapshot =
+        await getDocs(
+            collection(db,"decorations")
+        );
+
+
+        let found = false;
+
+
+        snapshot.forEach(function(photoDoc){
+
+            const data =
+            photoDoc.data();
+
+
+            if(data.service === "Balloon decoration"){
+
+                found = true;
+
+
+                const img =
+                document.createElement("img");
+
+
+                img.src =
+                data.imageUrl;
+
+
+                img.onclick = function(){
+
+                    localStorage.setItem(
+                        "selectedDecoration",
+                        img.src
+                    );
+
+                    localStorage.setItem(
+                        "selectedService",
+                        "Balloon Decoration"
+                    );
+
+                    window.location.href =
+                        "index.html#booking";
+
+                };
+
+
+                container.appendChild(img);
+
+            }
+
+        });
+
+
+        loading.innerText =
+            found
+            ? "New photos"
+            : "No new photos yet.";
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        loading.innerText =
+            "Unable to load new photos.";
+
+    }
+
+}
+
+
+loadFirebasePhotos();
+
+</script>
+
 </body>
 </html>
