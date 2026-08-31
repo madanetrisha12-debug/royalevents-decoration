@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Baby Welcome Decoration</title>
-    <style>
+
+<style>
+
 body{
     margin:0;
     padding:20px;
@@ -19,13 +25,22 @@ h1{
     border-radius:10px;
 }
 
-img{
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.gallery img,
+.gallery video{
     width:300px;
     height:220px;
+    max-width:90%;
     object-fit:cover;
-    margin:10px;
     border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,0.3);
+    cursor:pointer;
 }
 
 .back-btn{
@@ -37,123 +52,16 @@ img{
     text-decoration:none;
     border-radius:5px;
 }
+
 </style>
+
 </head>
 
 <body>
 
-<h1>👶Baby Welcome Decoration👶</h1>
-
-<!-- Photos -->
-
-<img src="baby welcome1.jpeg.jpeg" width="300">
-<img src="baby welcome2.jpeg.jpeg" width="300">
-<img src="baby welcome3.jpeg.jpeg" width="300">
-
-<br><br>
-
-<!-- Videos -->
-
-<video width="300" controls>
-    <source src="baby welcome1.mp4.mp4" type="video/mp4">
-</video>
-
-<video width="300" controls>
-    <source src="baby welcome2.mp4.mp4" type="video/mp4">
-</video>
-
-<video width="300" controls>
-    <source src="baby welcome3.mp4.mp4" type="video/mp4">
-</video>
-
-<video width="300" controls>
-    <source src="baby welcome4.mp4.mp4" type="video/mp4">
-</video>
-
-<video width="300" controls>
-    <source src="baby welcome5.mp4.mp4" type="video/mp4">
-</video>
-
-<video width="300" controls>
-    <source src="baby welcome6.mp4.mp4" type="video/mp4">
-</video>
-
-<video width="300" controls>
-    <source src="baby welcome7.mp4.mp4" type="video/mp4">
-</video>
-
-<video width="300" controls>
-    <source src="baby welcome8.mp4.mp4" type="video/mp4">
-</video>
-
-<video width="300" controls>
-    <source src="baby welcome9.mp4.mp4" type="video/mp4">
-</video>
-
-<video width="300" controls>
-    <source src="baby welcome10.mp4.mp4" type="video/mp4">
-</video>
-
-<video width="300" controls>
-    <source src="baby welcome11.mp4.mp4" type="video/mp4">
-</video>
-
-<br><br>
-
-<a href="index.html">⬅ Back to Home</a>
-<script>
-
-document.querySelectorAll("img").forEach(function(img){
-
-    img.style.cursor = "pointer";
-
-    img.onclick = function(){
-
-        localStorage.setItem(
-            "selectedDecoration",
-            img.src
-        );
-
-        localStorage.removeItem("selectedVideo");
-
-        localStorage.setItem(
-            "selectedService",
-            "Baby Welcome Decoration"
-        );
-
-        window.location.href =
-            "index.html#booking";
-    };
-
-});
+<h1>👶 Baby Welcome Decoration 👶</h1>
 
 
-document.querySelectorAll("video").forEach(function(video){
+<!-- OLD PHOTOS -->
 
-    video.style.cursor = "pointer";
-
-    video.onclick = function(){
-
-        let source = video.querySelector("source");
-
-        localStorage.setItem(
-            "selectedVideo",
-            source.src
-        );
-
-        localStorage.removeItem("selectedDecoration");
-
-        localStorage.setItem(
-            "selectedService",
-            "Baby Welcome Decoration"
-        );
-
-        window.location.href =
-            "index.html#booking";
-    };
-
-});
-
-</script>
-</body>
-</html>
+<div class="gallery">
