@@ -338,3 +338,107 @@ async function loadFirebaseContent(){
                 data.service ===
                 "Birthday Party Decoration"
                 )
+                const url = data.imageUrl;
+
+            if(!url){
+                return;
+            }
+
+            if(data.type === "image"){
+
+                found = true;
+
+                const img =
+                    document.createElement("img");
+
+                img.src = url;
+
+                img.onclick = function(){
+
+                    localStorage.setItem(
+                        "selectedDecoration",
+                        url
+                    );
+
+                    localStorage.removeItem(
+                        "selectedVideo"
+                    );
+
+                    localStorage.setItem(
+                        "selectedService",
+                        "Birthday Party Decoration"
+                    );
+
+                    window.location.href =
+                        "index.html#booking";
+
+                };
+
+                photoContainer.appendChild(img);
+            }
+
+
+            if(data.type === "video"){
+
+                found = true;
+
+                const video =
+                    document.createElement("video");
+
+                video.src = url;
+                video.controls = true;
+
+                video.onclick = function(){
+
+                    localStorage.setItem(
+                        "selectedVideo",
+                        url
+                    );
+
+                    localStorage.removeItem(
+                        "selectedDecoration"
+                    );
+
+                    localStorage.setItem(
+                        "selectedService",
+                        "Birthday Party Decoration"
+                    );
+
+                    window.location.href =
+                        "index.html#booking";
+
+                };
+
+                videoContainer.appendChild(video);
+            }
+
+        });
+
+
+        loading.style.display = "none";
+
+
+        if(!found){
+
+            loading.innerText =
+                "No new photos or videos.";
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        loading.innerText =
+            "Unable to load new photos.";
+
+    }
+
+}
+
+
+loadFirebaseContent();
+
+</script>
