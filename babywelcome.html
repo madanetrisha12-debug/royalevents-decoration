@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -53,6 +52,12 @@ h1{
     border-radius:5px;
 }
 
+#loading{
+    margin:20px;
+    font-size:18px;
+    color:#6b3e26;
+}
+
 </style>
 
 </head>
@@ -61,7 +66,294 @@ h1{
 
 <h1>👶 Baby Welcome Decoration 👶</h1>
 
+<div id="loading">Loading...</div>
 
-<!-- OLD PHOTOS -->
+<div class="gallery" id="gallery">
 
-<div class="gallery">
+    <!-- OLD PHOTOS -->
+
+    <img src="baby welcome1.jpeg.jpeg"
+         alt="Baby Welcome Decoration">
+
+    <img src="baby welcome2.jpeg.jpeg"
+         alt="Baby Welcome Decoration">
+
+    <img src="baby welcome3.jpeg.jpeg"
+         alt="Baby Welcome Decoration">
+
+
+    <!-- OLD VIDEOS -->
+
+    <video controls>
+        <source src="baby welcome1.mp4.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+        <source src="baby welcome2.mp4.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+        <source src="baby welcome3.mp4.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+        <source src="baby welcome4.mp4.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+        <source src="baby welcome5.mp4.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+        <source src="baby welcome6.mp4.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+        <source src="baby welcome7.mp4.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+        <source src="baby welcome8.mp4.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+        <source src="baby welcome9.mp4.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+        <source src="baby welcome10.mp4.mp4" type="video/mp4">
+    </video>
+
+    <video controls>
+        <source src="baby welcome11.mp4.mp4" type="video/mp4">
+    </video>
+
+</div>
+
+<a href="index.html" class="back-btn">
+    ⬅ Back to Home
+</a>
+
+
+<!-- Firebase -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+// ========================================
+// 🔥 YOUR FIREBASE CONFIG
+// ========================================
+
+const firebaseConfig = {
+
+    // इथे तुझ्या Firebase project चा
+    // आधी वापरलेला config ठेव
+
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+
+};
+
+
+// Firebase start
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+// ========================================
+// GALLERY
+// ========================================
+
+const gallery = document.getElementById("gallery");
+
+
+// Firebase मधले नवीन photos/videos load
+
+async function loadFirebaseMedia(){
+
+    try{
+
+        const snapshot =
+            await getDocs(collection(db,"decorations"));
+
+        snapshot.forEach((doc)=>{
+
+            const data = doc.data();
+
+            // Service check
+            const service =
+                (data.service || data.title || "")
+                .toLowerCase();
+
+            if(!service.includes("baby welcome")){
+                return;
+            }
+
+
+            // Photo URL
+            const photo =
+                data.photo ||
+                data.image ||
+                data.imageUrl ||
+                data.url;
+
+
+            // Video URL
+            const video =
+                data.video ||
+                data.videoUrl;
+
+
+            // =========================
+            // PHOTO
+            // =========================
+
+            if(photo){
+
+                const img =
+                    document.createElement("img");
+
+                img.src = photo;
+
+                img.alt =
+                    "Baby Welcome Decoration";
+
+                gallery.appendChild(img);
+
+            }
+
+
+            // =========================
+            // VIDEO
+            // =========================
+
+            if(video){
+
+                const videoElement =
+                    document.createElement("video");
+
+                videoElement.controls = true;
+
+                const source =
+                    document.createElement("source");
+
+                source.src = video;
+
+                source.type = "video/mp4";
+
+                videoElement.appendChild(source);
+
+                gallery.appendChild(videoElement);
+
+            }
+
+        });
+
+
+    }catch(error){
+
+        console.error(
+            "Firebase loading error:",
+            error
+        );
+
+    }
+
+
+    document.getElementById("loading").style.display =
+        "none";
+
+}
+
+
+// Start loading
+
+loadFirebaseMedia();
+
+
+// ========================================
+// PHOTO CLICK
+// ========================================
+
+document.querySelectorAll(".gallery img")
+.forEach(function(img){
+
+    img.onclick = function(){
+
+        localStorage.setItem(
+            "selectedDecoration",
+            img.src
+        );
+
+        localStorage.removeItem(
+            "selectedVideo"
+        );
+
+        localStorage.setItem(
+            "selectedService",
+            "Baby Welcome Decoration"
+        );
+
+        window.location.href =
+            "index.html#booking";
+
+    };
+
+});
+
+
+// ========================================
+// VIDEO CLICK
+// ========================================
+
+document.querySelectorAll(".gallery video")
+.forEach(function(video){
+
+    video.onclick = function(){
+
+        let source =
+            video.querySelector("source");
+
+        if(!source) return;
+
+        localStorage.setItem(
+            "selectedVideo",
+            source.src
+        );
+
+        localStorage.removeItem(
+            "selectedDecoration"
+        );
+
+        localStorage.setItem(
+            "selectedService",
+            "Baby Welcome Decoration"
+        );
+
+        window.location.href =
+            "index.html#booking";
+
+    };
+
+});
+
+</script>
+
+</body>
+</html>
