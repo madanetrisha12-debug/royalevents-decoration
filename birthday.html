@@ -1325,3 +1325,218 @@ async function loadFirebaseContent(){
 loadFirebaseContent();
 
 </script>
+    <!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyBQ3VaEXDkNC559MqQXTV8D_Ju5UtF_EvQ",
+
+    authDomain:
+    "the-royal-events-ebc7b.firebaseapp.com",
+
+    projectId:
+    "the-royal-events-ebc7b",
+
+    storageBucket:
+    "the-royal-events-ebc7b.firebasestorage.app",
+
+    messagingSenderId:
+    "495660292303",
+
+    appId:
+    "1:495660292303:web:b49e633791df627baa3fba"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+async function loadFirebaseContent(){
+
+    const photoContainer =
+        document.getElementById("firebasePhotos");
+
+    const videoContainer =
+        document.getElementById("firebaseVideos");
+
+    const loading =
+        document.getElementById("loading");
+
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(db, "decorations")
+            );
+
+
+        let found = false;
+
+
+        snapshot.forEach(function(decorationDoc){
+
+            const data =
+                decorationDoc.data();
+
+
+            /* BIRTHDAY DECORATION */
+
+            if(
+                String(data.service || "")
+                .trim()
+                .toLowerCase()
+                ===
+                "birthday party decoration"
+                .toLowerCase()
+            ){
+
+                const url =
+                    data.imageUrl || data.url;
+
+
+                if(!url){
+                    return;
+                }
+
+
+                /* PHOTO */
+
+                if(data.type === "image"){
+
+                    found = true;
+
+
+                    const img =
+                        document.createElement("img");
+
+
+                    img.src = url;
+
+
+                    img.alt =
+                        "Birthday Party Decoration";
+
+
+                    img.onclick = function(){
+
+                        localStorage.setItem(
+                            "selectedDecoration",
+                            url
+                        );
+
+                        localStorage.removeItem(
+                            "selectedVideo"
+                        );
+
+                        localStorage.setItem(
+                            "selectedService",
+                            "Birthday Party Decoration"
+                        );
+
+                        window.location.href =
+                            "index.html#booking";
+
+                    };
+
+
+                    photoContainer.appendChild(img);
+
+                }
+
+
+                /* VIDEO */
+
+                if(data.type === "video"){
+
+                    found = true;
+
+
+                    const video =
+                        document.createElement("video");
+
+
+                    video.src = url;
+
+                    video.controls = true;
+
+
+                    video.onclick = function(){
+
+                        localStorage.setItem(
+                            "selectedVideo",
+                            url
+                        );
+
+                        localStorage.removeItem(
+                            "selectedDecoration"
+                        );
+
+                        localStorage.setItem(
+                            "selectedService",
+                            "Birthday Party Decoration"
+                        );
+
+                        window.location.href =
+                            "index.html#booking";
+
+                    };
+
+
+                    videoContainer.appendChild(video);
+
+                }
+
+            }
+
+        });
+
+
+        loading.style.display = "none";
+
+
+        if(!found){
+
+            loading.innerText =
+                "No new photos or videos.";
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Firebase Error:",
+            error
+        );
+
+
+        loading.innerText =
+            "Unable to load new photos.";
+
+    }
+
+}
+
+
+loadFirebaseContent();
+
+</script>
