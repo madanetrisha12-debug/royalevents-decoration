@@ -42,7 +42,6 @@ img{
     margin:10px;
     border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,0.3);
-    cursor:pointer;
 }
 
 .book-btn{
@@ -93,130 +92,416 @@ img{
 <!-- PHOTO 2 -->
 
 <div class="photo-box">
-
-<img src="baby shower2.jpeg.jpeg"
-onclick="selectPhoto('baby shower2.jpeg.jpeg')">
+<img src="baby shower2.jpeg.jpeg">
 
 <button class="book-btn"
 onclick="selectPhoto('baby shower2.jpeg.jpeg')">
 Book This Decoration
 </button>
-
 </div>
 
 
 <!-- PHOTO 3 -->
 
 <div class="photo-box">
-
-<img src="baby shower3.jpeg.jpeg"
-onclick="selectPhoto('baby shower3.jpeg.jpeg')">
+<img src="baby shower3.jpeg.jpeg">
 
 <button class="book-btn"
 onclick="selectPhoto('baby shower3.jpeg.jpeg')">
 Book This Decoration
 </button>
-
 </div>
 
 
 <!-- PHOTO 4 -->
 
 <div class="photo-box">
-
-<img src="baby shower4.jpeg.jpeg"
-onclick="selectPhoto('baby shower4.jpeg.jpeg')">
+<img src="baby shower4.jpeg.jpeg">
 
 <button class="book-btn"
 onclick="selectPhoto('baby shower4.jpeg.jpeg')">
 Book This Decoration
 </button>
-
 </div>
 
 
 <!-- PHOTO 5 -->
 
 <div class="photo-box">
-
-<img src="baby shower5.jpeg.jpeg"
-onclick="selectPhoto('baby shower5.jpeg.jpeg')">
+<img src="baby shower5.jpeg.jpeg">
 
 <button class="book-btn"
 onclick="selectPhoto('baby shower5.jpeg.jpeg')">
 Book This Decoration
 </button>
-
 </div>
 
 
 <!-- PHOTO 6 -->
 
 <div class="photo-box">
-
-<img src="baby shower6.jpeg.jpeg"
-onclick="selectPhoto('baby shower6.jpeg.jpeg')">
+<img src="baby shower6.jpeg.jpeg">
 
 <button class="book-btn"
 onclick="selectPhoto('baby shower6.jpeg.jpeg')">
 Book This Decoration
 </button>
-
 </div>
 
 
 <!-- PHOTO 7 -->
 
 <div class="photo-box">
-
-<img src="baby shower7.jpeg.jpeg"
-onclick="selectPhoto('baby shower7.jpeg.jpeg')">
+<img src="baby shower7.jpeg.jpeg">
 
 <button class="book-btn"
 onclick="selectPhoto('baby shower7.jpeg.jpeg')">
 Book This Decoration
 </button>
-
 </div>
 
 
 <!-- PHOTO 8 -->
 
 <div class="photo-box">
-
-<img src="baby shower8.jpeg.jpeg"
-onclick="selectPhoto('baby shower8.jpeg.jpeg')">
+<img src="baby shower8.jpeg.jpeg">
 
 <button class="book-btn"
 onclick="selectPhoto('baby shower8.jpeg.jpeg')">
 Book This Decoration
 </button>
-
 </div>
 
 
 <!-- PHOTO 9 -->
 
 <div class="photo-box">
-
-<img src="baby shower9.jpeg.jpeg"
-onclick="selectPhoto('baby shower9.jpeg.jpeg')">
+<img src="baby shower9.jpeg.jpeg">
 
 <button class="book-btn"
 onclick="selectPhoto('baby shower9.jpeg.jpeg')">
 Book This Decoration
 </button>
-
 </div>
 
 
 <!-- PHOTO 11 -->
 
 <div class="photo-box">
-
-<img src="baby shower11.jpeg.jpeg"
-onclick="selectPhoto('baby shower11.jpeg.jpeg')">
+<img src="baby shower11.jpeg.jpeg">
 
 <button class="book-btn"
 onclick="selectPhoto('baby shower11.jpeg.jpeg')">
-Book This
+Book This Decoration
+</button>
+</div>
+
+
+<!-- PHOTO 12 -->
+
+<div class="photo-box">
+<img src="baby shower12.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('baby shower12.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<!-- PHOTO 13 -->
+
+<div class="photo-box">
+<img src="baby shower13.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('baby shower13.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<!-- PHOTO 14 -->
+
+<div class="photo-box">
+<img src="baby shower14.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('baby shower14.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<!-- PHOTO 15 -->
+
+<div class="photo-box">
+<img src="baby shower15.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('baby shower15.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<!-- PHOTO 16 -->
+
+<div class="photo-box">
+<img src="baby shower16.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('baby shower16.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<!-- PHOTO 17 -->
+
+<div class="photo-box">
+<img src="baby shower17.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('baby shower17.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<!-- PHOTO 18 -->
+
+<div class="photo-box">
+<img src="baby shower18.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('baby shower18.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<!-- PHOTO 19 -->
+
+<div class="photo-box">
+<img src="baby shower19.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('baby shower19.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<!-- NEW PHOTOS FROM ADMIN -->
+
+<h2>New Photos</h2>
+
+<p id="loading">Loading new photos...</p>
+
+<div id="firebasePhotos"></div>
+
+
+<a href="index.html" class="back-btn">
+⬅ Back to Home
+</a>
+
+
+<script>
+
+function selectPhoto(photoName){
+
+    localStorage.setItem(
+        "selectedDecoration",
+        photoName
+    );
+
+    localStorage.removeItem(
+        "selectedVideo"
+    );
+
+    localStorage.setItem(
+        "selectedService",
+        "Baby Shower Decoration"
+    );
+
+    window.location.href =
+        "index.html#booking";
+
+}
+
+</script>
+
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* YOUR FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+    apiKey: "YOUR_API_KEY",
+
+    authDomain:
+    "the-royal-events-ebc7b.firebaseapp.com",
+
+    projectId:
+    "the-royal-events-ebc7b",
+
+    storageBucket:
+    "the-royal-events-ebc7b.firebasestorage.app",
+
+    messagingSenderId:
+    "YOUR_MESSAGING_SENDER_ID",
+
+    appId:
+    "YOUR_APP_ID"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+/* LOAD NEW PHOTOS */
+
+async function loadFirebasePhotos(){
+
+    const container =
+        document.getElementById("firebasePhotos");
+
+    const loading =
+        document.getElementById("loading");
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(db,"decorations")
+            );
+
+        let found = false;
+
+
+        snapshot.forEach(function(photoDoc){
+
+            const data =
+                photoDoc.data();
+
+
+            if(
+                data.service ===
+                "Baby Shower Decoration"
+                &&
+                data.type === "image"
+            ){
+
+                found = true;
+
+
+                const box =
+                    document.createElement("div");
+
+                box.className =
+                    "photo-box";
+
+
+                const img =
+                    document.createElement("img");
+
+                img.src =
+                    data.imageUrl;
+
+
+                const button =
+                    document.createElement("button");
+
+                button.className =
+                    "book-btn";
+
+                button.innerText =
+                    "Book This Decoration";
+
+
+                button.onclick =
+                    function(){
+
+                        localStorage.setItem(
+                            "selectedDecoration",
+                            data.imageUrl
+                        );
+
+                        localStorage.removeItem(
+                            "selectedVideo"
+                        );
+
+                        localStorage.setItem(
+                            "selectedService",
+                            "Baby Shower Decoration"
+                        );
+
+                        window.location.href =
+                            "index.html#booking";
+
+                    };
+
+
+                box.appendChild(img);
+
+                box.appendChild(button);
+
+                container.appendChild(box);
+
+            }
+
+        });
+
+
+        if(found){
+
+            loading.innerText =
+                "New photos available";
+
+        }
+        else{
+
+            loading.innerText =
+                "No new photos yet.";
+
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        loading.innerText =
+            "Unable to load new photos.";
+
+    }
+
+}
+
+
+loadFirebasePhotos();
+
+</script>
+
+
+</body>
+
+</html>
