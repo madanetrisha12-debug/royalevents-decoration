@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -24,7 +25,504 @@ h1{
     border-radius:10px;
 }
 
+h2{
+    color:#6b3e26;
+    margin-top:30px;
+}
+
+.media-box{
+    margin-bottom:25px;
+}
+
 img, video{
     width:300px;
     height:220px;
-    max-width
+    max-width:90%;
+    object-fit:cover;
+    margin:10px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+}
+
+.book-btn{
+    display:block;
+    width:300px;
+    max-width:90%;
+    margin:5px auto 20px;
+    padding:12px;
+    background:#6b3e26;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 20px;
+    background:#222;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+#firebaseMedia{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+#loading{
+    color:#555;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>💍 Wedding Decoration 💍</h1>
+
+
+<!-- ================= PHOTOS ================= -->
+
+<h2>Wedding Decoration Photos</h2>
+
+
+<div class="media-box">
+<img src="wedding1.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding1.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding2.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding2.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding3.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding3.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding4.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding4.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding5.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding5.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding6.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding6.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding7.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding7.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding8.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding8.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding9.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding9.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding10.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding10.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding11.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding11.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding12.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding12.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding13.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding13.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding14.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding14.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding15.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding15.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+<div class="media-box">
+<img src="wedding16.jpeg.jpeg">
+<button class="book-btn"
+onclick="selectPhoto('wedding16.jpeg.jpeg')">
+Book This Decoration
+</button>
+</div>
+
+
+
+<!-- ================= VIDEOS ================= -->
+
+<h2>Wedding Decoration Videos</h2>
+
+
+<div class="media-box">
+
+<video controls>
+<source src="wedding1.mp4.mp4" type="video/mp4">
+</video>
+
+<button class="book-btn"
+onclick="selectVideo('wedding1.mp4.mp4')">
+Book This Video
+</button>
+
+</div>
+
+
+<div class="media-box">
+
+<video controls>
+<source src="wedding2.mp4.mp4" type="video/mp4">
+</video>
+
+<button class="book-btn"
+onclick="selectVideo('wedding2.mp4.mp4')">
+Book This Video
+</button>
+
+</div>
+
+
+<div class="media-box">
+
+<video controls>
+<source src="wedding3.mp4.mp4" type="video/mp4">
+</video>
+
+<button class="book-btn"
+onclick="selectVideo('wedding3.mp4.mp4')">
+Book This Video
+</button>
+
+</div>
+
+
+
+<!-- ================= NEW ADMIN PHOTOS ================= -->
+
+<h2>New Photos</h2>
+
+<p id="loading">
+Loading new photos...
+</p>
+
+<div id="firebaseMedia"></div>
+
+
+<a href="index.html" class="back-btn">
+⬅ Back to Home
+</a>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+function selectPhoto(photoName){
+
+    localStorage.setItem(
+        "selectedDecoration",
+        photoName
+    );
+
+    localStorage.removeItem(
+        "selectedVideo"
+    );
+
+    localStorage.setItem(
+        "selectedService",
+        "Wedding Decoration"
+    );
+
+    window.location.href =
+        "index.html#booking";
+}
+
+
+function selectVideo(videoName){
+
+    localStorage.setItem(
+        "selectedVideo",
+        videoName
+    );
+
+    localStorage.removeItem(
+        "selectedDecoration"
+    );
+
+    localStorage.setItem(
+        "selectedService",
+        "Wedding Decoration"
+    );
+
+    window.location.href =
+        "index.html#booking";
+}
+
+</script>
+
+
+
+<!-- ================= FIREBASE ================= -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/*
+IMPORTANT:
+इथे तुझ्या balloon.html मधला
+SAME firebaseConfig paste कर.
+*/
+
+const firebaseConfig = {
+
+    apiKey: "YOUR_API_KEY",
+
+    authDomain:
+    "the-royal-events-ebc7b.firebaseapp.com",
+
+    projectId:
+    "the-royal-events-ebc7b",
+
+    storageBucket:
+    "the-royal-events-ebc7b.firebasestorage.app",
+
+    messagingSenderId:
+    "YOUR_MESSAGING_SENDER_ID",
+
+    appId:
+    "YOUR_APP_ID"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+
+async function loadFirebasePhotos(){
+
+    const container =
+        document.getElementById("firebaseMedia");
+
+    const loading =
+        document.getElementById("loading");
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(db,"decorations")
+            );
+
+        let found = false;
+
+
+        snapshot.forEach(function(photoDoc){
+
+            const data =
+                photoDoc.data();
+
+
+            if(
+                data.service ===
+                "Wedding Decoration"
+                &&
+                data.type === "image"
+            ){
+
+                found = true;
+
+
+                const box =
+                    document.createElement("div");
+
+                box.className =
+                    "media-box";
+
+
+                const img =
+                    document.createElement("img");
+
+                img.src =
+                    data.imageUrl;
+
+
+                const button =
+                    document.createElement("button");
+
+                button.className =
+                    "book-btn";
+
+                button.innerText =
+                    "Book This Decoration";
+
+
+                button.onclick = function(){
+
+                    localStorage.setItem(
+                        "selectedDecoration",
+                        data.imageUrl
+                    );
+
+                    localStorage.removeItem(
+                        "selectedVideo"
+                    );
+
+                    localStorage.setItem(
+                        "selectedService",
+                        "Wedding Decoration"
+                    );
+
+                    window.location.href =
+                        "index.html#booking";
+
+                };
+
+
+                box.appendChild(img);
+
+                box.appendChild(button);
+
+                container.appendChild(box);
+
+            }
+
+        });
+
+
+        if(found){
+
+            loading.innerText =
+                "New photos available";
+
+        }else{
+
+            loading.innerText =
+                "No new photos yet.";
+
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        loading.innerText =
+            "Unable to load new photos.";
+
+    }
+
+}
+
+
+loadFirebasePhotos();
+
+</script>
+
+
+</body>
+
+</html>
