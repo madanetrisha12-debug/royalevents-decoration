@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -29,6 +30,11 @@ h1{
     gap:20px;
 }
 
+.item{
+    width:320px;
+    margin-bottom:20px;
+}
+
 .gallery img,
 .gallery video{
     width:300px;
@@ -37,7 +43,24 @@ h1{
     object-fit:cover;
     border-radius:12px;
     box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.book-btn{
+    display:block;
+    width:300px;
+    max-width:90%;
+    margin:8px auto;
+    padding:12px;
+    background:#0a8f3d;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
     cursor:pointer;
+}
+
+.book-btn:hover{
+    background:#08752f;
 }
 
 .back{
@@ -60,16 +83,109 @@ h1{
 <h1>💚 Mehandi Decoration</h1>
 
 
-<!-- OLD PHOTOS -->
+<h2>Mehandi Decoration Photos</h2>
 
 <div class="gallery">
 
+
+<!-- PHOTO 1 -->
+
+<div class="item">
+
 <img src="mehandi1.jpeg.jpeg">
-<img src="mehandi2.jpeg.jpeg">
-<img src="mehandi3.jpeg.jpeg">
-<img src="mehandi4.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('mehandi1.jpeg.jpeg')">
+Book This Decoration
+</button>
 
 </div>
 
 
-<h2>New Photos & Videos</h2
+<!-- PHOTO 2 -->
+
+<div class="item">
+
+<img src="mehandi2.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('mehandi2.jpeg.jpeg')">
+Book This Decoration
+</button>
+
+</div>
+
+
+<!-- PHOTO 3 -->
+
+<div class="item">
+
+<img src="mehandi3.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('mehandi3.jpeg.jpeg')">
+Book This Decoration
+</button>
+
+</div>
+
+
+<!-- PHOTO 4 -->
+
+<div class="item">
+
+<img src="mehandi4.jpeg.jpeg">
+
+<button class="book-btn"
+onclick="selectPhoto('mehandi4.jpeg.jpeg')">
+Book This Decoration
+</button>
+
+</div>
+
+
+</div>
+
+
+<h2>New Photos & Videos</h2>
+
+<p>
+New decorations can be added from the Admin Panel.
+</p>
+
+
+<a href="index.html" class="back">
+⬅ Back to Home
+</a>
+
+
+
+<script>
+
+function selectPhoto(photoName){
+
+    localStorage.setItem(
+        "selectedDecoration",
+        photoName
+    );
+
+    localStorage.removeItem(
+        "selectedVideo"
+    );
+
+    localStorage.setItem(
+        "selectedService",
+        "Mehandi Decoration"
+    );
+
+    window.location.href =
+        "index.html#booking";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
