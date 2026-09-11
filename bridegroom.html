@@ -147,7 +147,23 @@ document.querySelectorAll("video").forEach(function(video){
     };
 
 });
+function selectVideo(videoName){
 
+    localStorage.setItem(
+        "selectedVideo",
+        videoName
+    );
+
+    localStorage.removeItem("selectedDecoration");
+
+    localStorage.setItem(
+        "selectedService",
+        "Bride-Groom Entry"
+    );
+
+    window.location.href =
+        "index.html#booking";
+}
 </script>
 
 
