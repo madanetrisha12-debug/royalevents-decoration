@@ -30,15 +30,11 @@ h2{
     margin-top:30px;
 }
 
-.media-box{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+.photo-box{
     margin-bottom:25px;
 }
 
-img,
-video{
+img{
     width:300px;
     height:220px;
     max-width:90%;
@@ -46,6 +42,7 @@ video{
     margin:10px;
     border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,0.3);
+    cursor:pointer;
 }
 
 .book-btn{
@@ -62,8 +59,14 @@ video{
     font-size:16px;
 }
 
-.book-btn:hover{
-    opacity:0.9;
+.back-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 20px;
+    background:#6b3e26;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
 }
 
 #firebasePhotos{
@@ -76,16 +79,6 @@ video{
     color:#555;
 }
 
-.back-btn{
-    display:inline-block;
-    margin-top:20px;
-    padding:10px 20px;
-    background:#6b3e26;
-    color:white;
-    text-decoration:none;
-    border-radius:5px;
-}
-
 </style>
 
 </head>
@@ -94,166 +87,136 @@ video{
 
 <h1>🍼 Baby Shower Decoration 🍼</h1>
 
-
-<!-- OLD PHOTOS -->
-
 <h2>Decoration Photos</h2>
 
 
-<div class="media-box">
+<!-- PHOTO 2 -->
 
-<img src="babyshower1.jpeg.jpeg"
-onclick="selectPhoto('babyshower1.jpeg.jpeg')">
+<div class="photo-box">
+
+<img src="baby shower2.jpeg.jpeg"
+onclick="selectPhoto('baby shower2.jpeg.jpeg')">
 
 <button class="book-btn"
-onclick="selectPhoto('babyshower1.jpeg.jpeg')">
+onclick="selectPhoto('baby shower2.jpeg.jpeg')">
 Book This Decoration
 </button>
 
 </div>
 
 
-<div class="media-box">
+<!-- PHOTO 3 -->
 
-<img src="babyshower2.jpeg.jpeg"
-onclick="selectPhoto('babyshower2.jpeg.jpeg')">
+<div class="photo-box">
+
+<img src="baby shower3.jpeg.jpeg"
+onclick="selectPhoto('baby shower3.jpeg.jpeg')">
 
 <button class="book-btn"
-onclick="selectPhoto('babyshower2.jpeg.jpeg')">
+onclick="selectPhoto('baby shower3.jpeg.jpeg')">
 Book This Decoration
 </button>
 
 </div>
 
 
-<div class="media-box">
+<!-- PHOTO 4 -->
 
-<img src="babyshower3.jpeg.jpeg"
-onclick="selectPhoto('babyshower3.jpeg.jpeg')">
+<div class="photo-box">
+
+<img src="baby shower4.jpeg.jpeg"
+onclick="selectPhoto('baby shower4.jpeg.jpeg')">
 
 <button class="book-btn"
-onclick="selectPhoto('babyshower3.jpeg.jpeg')">
+onclick="selectPhoto('baby shower4.jpeg.jpeg')">
 Book This Decoration
 </button>
 
 </div>
 
 
-<div class="media-box">
+<!-- PHOTO 5 -->
 
-<img src="babyshower4.jpeg.jpeg"
-onclick="selectPhoto('babyshower4.jpeg.jpeg')">
+<div class="photo-box">
+
+<img src="baby shower5.jpeg.jpeg"
+onclick="selectPhoto('baby shower5.jpeg.jpeg')">
 
 <button class="book-btn"
-onclick="selectPhoto('babyshower4.jpeg.jpeg')">
+onclick="selectPhoto('baby shower5.jpeg.jpeg')">
 Book This Decoration
 </button>
 
 </div>
 
 
-<!-- NEW PHOTOS / VIDEOS FROM FIREBASE -->
+<!-- PHOTO 6 -->
 
-<h2>New Photos & Videos</h2>
+<div class="photo-box">
 
-<p id="loading">
-Loading new decorations...
-</p>
+<img src="baby shower6.jpeg.jpeg"
+onclick="selectPhoto('baby shower6.jpeg.jpeg')">
 
-<div id="firebasePhotos"></div>
+<button class="book-btn"
+onclick="selectPhoto('baby shower6.jpeg.jpeg')">
+Book This Decoration
+</button>
 
-
-<br>
-
-<a href="index.html" class="back-btn">
-⬅ Back to Home
-</a>
+</div>
 
 
-<script type="module">
+<!-- PHOTO 7 -->
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+<div class="photo-box">
 
-import {
-    getFirestore,
-    collection,
-    getDocs
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+<img src="baby shower7.jpeg.jpeg"
+onclick="selectPhoto('baby shower7.jpeg.jpeg')">
 
+<button class="book-btn"
+onclick="selectPhoto('baby shower7.jpeg.jpeg')">
+Book This Decoration
+</button>
 
-const firebaseConfig = {
-
-    apiKey: "YOUR_API_KEY",
-
-    authDomain: "the-royal-events-ebc7b.firebaseapp.com",
-
-    projectId: "the-royal-events-ebc7b",
-
-    storageBucket: "the-royal-events-ebc7b.firebasestorage.app",
-
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-
-    appId: "YOUR_APP_ID"
-
-};
+</div>
 
 
-const app = initializeApp(firebaseConfig);
+<!-- PHOTO 8 -->
 
-const db = getFirestore(app);
+<div class="photo-box">
 
+<img src="baby shower8.jpeg.jpeg"
+onclick="selectPhoto('baby shower8.jpeg.jpeg')">
 
+<button class="book-btn"
+onclick="selectPhoto('baby shower8.jpeg.jpeg')">
+Book This Decoration
+</button>
 
-/* PHOTO SELECTION */
-
-window.selectPhoto = function(photoName){
-
-    localStorage.setItem(
-        "selectedDecoration",
-        photoName
-    );
-
-    localStorage.removeItem(
-        "selectedVideo"
-    );
-
-    localStorage.setItem(
-        "selectedService",
-        "Baby Shower Decoration"
-    );
-
-    window.location.href =
-        "index.html#booking";
-
-};
+</div>
 
 
+<!-- PHOTO 9 -->
 
-/* VIDEO SELECTION */
+<div class="photo-box">
 
-window.selectVideo = function(videoUrl){
+<img src="baby shower9.jpeg.jpeg"
+onclick="selectPhoto('baby shower9.jpeg.jpeg')">
 
-    localStorage.setItem(
-        "selectedVideo",
-        videoUrl
-    );
+<button class="book-btn"
+onclick="selectPhoto('baby shower9.jpeg.jpeg')">
+Book This Decoration
+</button>
 
-    localStorage.removeItem(
-        "selectedDecoration"
-    );
-
-    localStorage.setItem(
-        "selectedService",
-        "Baby Shower Decoration"
-    );
-
-    window.location.href =
-        "index.html#booking";
-
-};
+</div>
 
 
+<!-- PHOTO 11 -->
 
-/*
+<div class="photo-box">
+
+<img src="baby shower11.jpeg.jpeg"
+onclick="selectPhoto('baby shower11.jpeg.jpeg')">
+
+<button class="book-btn"
+onclick="selectPhoto('baby shower11.jpeg.jpeg')">
+Book This
